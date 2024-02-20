@@ -3,8 +3,8 @@
 ## Group T0xG0y
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
-| John Doe         | 201901010 | ...                |
-| Jane Doe         | 201901011 | ...                |
+| Pedro Beirão     | 202108718 | up202108718@up.pt  |
+| André Santos     | 202108658 | up202108658@up.pt  |
 
 ----
 
