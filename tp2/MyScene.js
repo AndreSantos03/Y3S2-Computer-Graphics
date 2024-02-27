@@ -119,7 +119,7 @@ export class MyScene extends CGFscene {
         1, 0, 0, 0,
         0, 1, 0, 0,
         0, 0, 1, 0,
-        1.5, -1.5 , 0, 1
+        1.5, -2.5 , 0, 1
       ];
     
       this.multMatrix(translateMatrix);
@@ -134,6 +134,15 @@ export class MyScene extends CGFscene {
       ];
       this.multMatrix(rotateMatrix);
       this.diamond.display();
+      this.popMatrix();
+    }
+
+    if (this.displayTriangle)
+    {
+      this.pushMatrix();
+      this.translate(1,0,0)
+      this.rotate(Math.PI/4, 0, 0, 1)
+      this.triangle.display();
       this.popMatrix();
     }
 
