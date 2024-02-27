@@ -109,12 +109,36 @@ export class MyScene extends CGFscene {
     this.multMatrix(sca);
 
     // ---- BEGIN Primitive drawing section
+    if(this.displayDiamond)
+    {
+    
+      //Translate Diamond
+      this.pushMatrix();
 
-    this.rotate(Math.PI/4,0,0,1);
-    this.translate(0,-3.5,0)
+      var translateMatrix = [
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        1.5, -1.5 , 0, 1
+      ];
+    
+      this.multMatrix(translateMatrix);
+      //Rotate Diamond
 
+      var rotateValue = Math.PI / 4;
+      var rotateMatrix = [
+        Math.cos(rotateValue), -Math.sin(rotateValue), 0, 0,
+        Math.sin(rotateValue), Math.cos(rotateValue), 0, 0,
+        0, 0, 1, 0,
+        0, 0 , 0, 1
+      ];
+      this.multMatrix(rotateMatrix);
+      this.diamond.display();
+      this.popMatrix();
+    }
 
-    if (this.displayDiamond) this.diamond.display();
+  
+
 /*     if (this.displayTriangle) this.triangle.display();
     if (this.displayParallelogram) this.parallelogram.display();
     if(this.displaySmallTriangle) this.smallTriangle.display();
