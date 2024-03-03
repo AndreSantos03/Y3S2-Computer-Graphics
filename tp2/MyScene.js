@@ -33,18 +33,24 @@ export class MyScene extends CGFscene {
 
     this.displayDiamond = true;
     this.diamond = new MyDiamond(this);
-    
-    this.displayTriangle = true;
-    this.triangle = new MyTriangle(this);
 
     this.displayParallelogram = true;
     this.parallelogram = new MyParallelogram(this);
 
-    this.displaySmallTriangle = true;
-    this.smallTriangle = new MyTriangleSmall(this);
+    this.displayTriangle1 = true;
+    this.triangle1 = new MyTriangle(this);
+
+    this.displaySmallTriangle1 = true;
+    this.smallTriangle1 = new MyTriangleSmall(this);
+
+    this.displaySmallTriangle2 = true;
+    this.smallTriangle2 = new MyTriangleSmall(this);
     
-    this.displayBigTriangle = true;
-    this.bigTriangle = new MyTriangleBig(this);
+    this.displayBigTriangle1 = true;
+    this.bigTriangle1 = new MyTriangleBig(this);
+
+    this.displayBigTriangle2 = true;
+    this.bigTriangle2 = new MyTriangleBig(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -119,7 +125,7 @@ export class MyScene extends CGFscene {
         1, 0, 0, 0,
         0, 1, 0, 0,
         0, 0, 1, 0,
-        1.5, -2.5 , 0, 1
+        1.5, -2.7 , 0, 1
       ];
     
       this.multMatrix(translateMatrix);
@@ -137,12 +143,55 @@ export class MyScene extends CGFscene {
       this.popMatrix();
     }
 
-    if (this.displayTriangle)
+    if (this.displayTriangle1)
     {
       this.pushMatrix();
-      this.translate(1,0,0)
-      this.rotate(Math.PI/4, 0, 0, 1)
-      this.triangle.display();
+      this.translate(1.2,-1,0)
+      this.rotate(-Math.PI, 0, 0, 1)
+      this.triangle1.display();
+      this.popMatrix();
+    }
+
+    if (this.displayBigTriangle1)
+    {
+      this.pushMatrix();
+      this.bigTriangle1.display();
+      this.popMatrix();
+    }
+
+    if (this.displayBigTriangle2)
+    {
+      this.pushMatrix();
+      this.translate(-0.6,-2,0)
+      this.rotate(Math.PI*3/4, 0, 0, 1)
+      this.bigTriangle2.display();
+      this.popMatrix();
+    }
+
+    if (this.displaySmallTriangle1)
+    {
+      this.pushMatrix();
+      this.translate(-2.7,-0.7,0)
+      this.rotate(-Math.PI/4, 0, 0, 1)
+      this.smallTriangle1.display();
+      this.popMatrix();
+    }
+
+    if (this.displaySmallTriangle2)
+    {
+      this.pushMatrix();
+      this.translate(0,3,0)
+      this.rotate(Math.PI, 0, 0, 1)
+      this.smallTriangle2.display();
+      this.popMatrix();
+    }
+
+    if (this.displayParallelogram)
+    {
+      this.pushMatrix();
+      this.translate(2.2,0,0)
+      this.rotate(-Math.PI/2, 0, 0, 1)
+      this.parallelogram.display();
       this.popMatrix();
     }
 

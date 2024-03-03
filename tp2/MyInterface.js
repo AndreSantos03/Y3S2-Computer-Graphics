@@ -24,10 +24,12 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
         
         this.gui.add(this.scene,'displayDiamond').name('Diamond');
-        this.gui.add(this.scene,'displayTriangle').name('Triangle');
         this.gui.add(this.scene,'displayParallelogram').name('Parallelogram');
-        this.gui.add(this.scene,'displaySmallTriangle').name('Small Triangle');
-        this.gui.add(this.scene,'displayBigTriangle').name('Big Triangle');
+        this.gui.add(this.scene,'displayTriangle1').name('Triangle 1');
+        this.gui.add(this.scene,'displaySmallTriangle1').name('Small Triangle 1');
+        this.gui.add(this.scene,'displaySmallTriangle2').name('Small Triangle 2');
+        this.gui.add(this.scene,'displayBigTriangle1').name('Big Triangle 1');
+        this.gui.add(this.scene,'displayBigTriangle2').name('Big Triangle 2');
 
         return true;
     }
