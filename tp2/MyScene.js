@@ -32,7 +32,7 @@ export class MyScene extends CGFscene {
     this.displayTangram = true
     this.tangram = new MyTangram(this);
 
-    this.displayUnitCube = true
+    this.displayUnitCube = false
     this.unitCube = new MyUnitCube(this);
 
     this.displayUnitCubeQuad = true
@@ -104,21 +104,20 @@ export class MyScene extends CGFscene {
     {
       this.tangram.display(this)
     }
-/*
+
     if (this.displayUnitCube)
     {
       this.pushMatrix();
-      this.translate(0,0,-2)
+      this.translate(0.5,-0.5,0.5)
       this.rotate(0, 0, 0, 1)
       this.unitCube.display(this)
       this.popMatrix();
     }
-*/
 
     if (this.displayUnitCubeQuad)
     {
       this.pushMatrix();
-      this.translate(0,0,-2)
+      this.translate(0.5,-0.5,0.5)
       this.unitCubeQuad.display(this)
       this.popMatrix();
     }
