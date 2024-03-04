@@ -1,9 +1,5 @@
 import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
-import { MyDiamond } from "./MyDiamond.js";
-import { MyTriangle } from "./MyTriangle.js";
-import { MyParallelogram } from "./MyParallelogram.js";
-import { MyTriangleSmall } from "./MyTriangleSmall.js";
-import {MyTriangleBig} from "./MyTriangleBig.js";
+import { MyTangram } from "./MyTangram.js";
 
 
 /**
@@ -31,26 +27,8 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
 
-    this.displayDiamond = true;
-    this.diamond = new MyDiamond(this);
-
-    this.displayParallelogram = true;
-    this.parallelogram = new MyParallelogram(this);
-
-    this.displayTriangle1 = true;
-    this.triangle1 = new MyTriangle(this);
-
-    this.displaySmallTriangle1 = true;
-    this.smallTriangle1 = new MyTriangleSmall(this);
-
-    this.displaySmallTriangle2 = true;
-    this.smallTriangle2 = new MyTriangleSmall(this);
-    
-    this.displayBigTriangle1 = true;
-    this.bigTriangle1 = new MyTriangleBig(this);
-
-    this.displayBigTriangle2 = true;
-    this.bigTriangle2 = new MyTriangleBig(this);
+    this.displayTangram = true
+    this.tangram = new MyTangram(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -92,7 +70,7 @@ export class MyScene extends CGFscene {
     if (this.displayAxis) this.axis.display();
 
     this.setDefaultAppearance();
-
+    
     var sca = [
       this.scaleFactor,
       0.0,
@@ -114,85 +92,9 @@ export class MyScene extends CGFscene {
 
     this.multMatrix(sca);
 
-    // ---- BEGIN Primitive drawing section
-    if(this.displayDiamond)
+    if (this.displayTangram)
     {
-    
-      //Translate Diamond
-      this.pushMatrix();
-
-      var translateMatrix = [
-        1, 0, 0, 0,
-        0, 1, 0, 0,
-        0, 0, 1, 0,
-        1.5, -2.7 , 0, 1
-      ];
-    
-      this.multMatrix(translateMatrix);
-      //Rotate Diamond
-
-      var rotateValue = Math.PI / 4;
-      var rotateMatrix = [
-        Math.cos(rotateValue), -Math.sin(rotateValue), 0, 0,
-        Math.sin(rotateValue), Math.cos(rotateValue), 0, 0,
-        0, 0, 1, 0,
-        0, 0 , 0, 1
-      ];
-      this.multMatrix(rotateMatrix);
-      this.diamond.display();
-      this.popMatrix();
-    }
-
-    if (this.displayTriangle1)
-    {
-      this.pushMatrix();
-      this.translate(1.2,-1,0)
-      this.rotate(-Math.PI, 0, 0, 1)
-      this.triangle1.display();
-      this.popMatrix();
-    }
-
-    if (this.displayBigTriangle1)
-    {
-      this.pushMatrix();
-      this.bigTriangle1.display();
-      this.popMatrix();
-    }
-
-    if (this.displayBigTriangle2)
-    {
-      this.pushMatrix();
-      this.translate(-0.6,-2,0)
-      this.rotate(Math.PI*3/4, 0, 0, 1)
-      this.bigTriangle2.display();
-      this.popMatrix();
-    }
-
-    if (this.displaySmallTriangle1)
-    {
-      this.pushMatrix();
-      this.translate(-2.7,-0.7,0)
-      this.rotate(-Math.PI/4, 0, 0, 1)
-      this.smallTriangle1.display();
-      this.popMatrix();
-    }
-
-    if (this.displaySmallTriangle2)
-    {
-      this.pushMatrix();
-      this.translate(0,3,0)
-      this.rotate(Math.PI, 0, 0, 1)
-      this.smallTriangle2.display();
-      this.popMatrix();
-    }
-
-    if (this.displayParallelogram)
-    {
-      this.pushMatrix();
-      this.translate(2.2,0,0)
-      this.rotate(-Math.PI/2, 0, 0, 1)
-      this.parallelogram.display();
-      this.popMatrix();
+      this.tangram.display(this)
     }
 
   
