@@ -1,4 +1,4 @@
-import { CGFscene, CGFcamera, CGFaxis, CGFobject } from "../lib/CGF.js";
+import { CGFscene, CGFcamera, CGFaxis, CGFobject, CGFappearance } from "../lib/CGF.js";
 import { MyDiamond } from "./MyDiamond.js";
 import { MyTriangle } from "./MyTriangle.js";
 import { MyParallelogram } from "./MyParallelogram.js";
@@ -20,7 +20,31 @@ export class MyTangram extends CGFobject {
     this.smallTriangle1 = new MyTriangleSmall(this.scene);
     this.smallTriangle2 = new MyTriangleSmall(this.scene);
     this.parallelogram = new MyParallelogram(this.scene);
-}
+
+    this.initMaterials();
+
+
+  }
+
+
+  initMaterials(){
+    
+    //Diamond
+    this.diamondMaterial = new CGFappearance(this.scene);
+    this.diamondMaterial.setAmbient(0, 1,1, 1.0);
+    this.diamondMaterial.setDiffuse(0, 1, 1, 0)
+    this.diamondMaterial.setSpecular(0.9, 0.9, 0.9, 1.0);
+    this.diamondMaterial.setShininess(10.0);
+
+    //Triangle1
+/*     this.diamondMaterial = new CGFappearance(this.scene);
+    this.diamondMaterial.setAmbient(0, 1,1, 1.0);
+    this.diamondMaterial.setDiffuse(0, 1, 1, 0)
+    this.diamondMaterial.setSpecular(0.9, 0.9, 0.9, 1.0);
+    this.diamondMaterial.setShininess(10.0); */
+
+
+  }
 
   display() {
 
@@ -53,7 +77,7 @@ export class MyTangram extends CGFobject {
     this.scene.pushMatrix();
     this.scene.translate(1.2,-1,0)
     this.scene.rotate(-Math.PI, 0, 0, 1)
-    this.triangle1.display();
+    // this.triangle1.display();
     this.scene.popMatrix();
 
     this.scene.pushMatrix();
