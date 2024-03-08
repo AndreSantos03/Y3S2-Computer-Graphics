@@ -16,26 +16,39 @@ export class MyPrism extends CGFobject {
 	}
 	
 	initBuffers() {
-		this.vertices = [0, 0, 0]
-		this.indices = [0, 1, 2]
+		this.vertices = []
+		this.indices = []
 
 		var angle = 2 * Math.PI / this.slices
 
-		for (var i = 0; i < this.slices; i++)
+		for (var j = 0; j < this.stacks; j++)
 		{
-			this.vertices.push(Math.cos(angle * i))
-			this.vertices.push(Math.sin(angle * i))
-			this.vertices.push(0)
+			for (var i = 0; i < this.slices; i++)
+			{
+				this.vertices.push(Math.cos(angle * i))
+				this.vertices.push(Math.sin(angle * i))
+				this.vertices.push((j+1) / this.stacks)
 
-			this.indices.push(0)
-			this.indices.push(i+1)
-			this.indices.push(i+2)
+				this.vertices.push(Math.cos(angle * i))
+				this.vertices.push(Math.sin(angle * i))
+				this.vertices.push(j / this.stacks)
+
+				this.indices.push(j*this.slices*2 + i*2)
+				this.indices.push(j*this.slices*2 + i*2+1)
+				this.indices.push(j*this.slices*2 + i*2+2)
+
+				this.indices.push(j*this.slices*2 + i*2+1)
+				this.indices.push(j*this.slices*2 + i*2+3)
+				this.indices.push(j*this.slices*2 + i*2+2)
+			}
+
+			this.indices[this.indices.length-1] = j*this.slices*2
+			this.indices[this.indices.length-2] = j*this.slices*2 + 1
+			this.indices[this.indices.length-4] = j*this.slices*2
 		}
 
-		this.indices[this.indices.length-1] = 1
-
-		console.log(this.indices)
-		console.log(this.vertices)
+		print (this.indices)
+		print (this.vertices)
 
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles
@@ -45,6 +58,8 @@ export class MyPrism extends CGFobject {
 	}
 
 	updateBuffers(complexity){
+		this.slices = 3 + Math.round(9 * complexity);
+		
         // reinitialize buffers
         this.initBuffers();
         this.initNormalVizBuffers();
