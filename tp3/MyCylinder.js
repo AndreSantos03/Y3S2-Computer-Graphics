@@ -51,8 +51,8 @@ export class MyCylinder extends CGFobject {
 			this.indices[this.indices.length-4] = j*this.slices*2
 		}
 
-		print (this.indices)
-		print (this.vertices)
+		console.log(this.indices)
+		console.log(this.vertices)
 
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles

@@ -34,25 +34,33 @@ export class MyPrism extends CGFobject {
 				this.vertices.push(Math.sin(angle * i))
 				this.vertices.push(j / this.stacks)
 
-				this.indices.push(j*this.slices*2 + i*2)
-				this.indices.push(j*this.slices*2 + i*2+1)
-				this.indices.push(j*this.slices*2 + i*2+2)
 
-				this.indices.push(j*this.slices*2 + i*2+1)
-				this.indices.push(j*this.slices*2 + i*2+3)
-				this.indices.push(j*this.slices*2 + i*2+2)
+				this.vertices.push(Math.cos(angle * (i+1)))
+				this.vertices.push(Math.sin(angle * (i+1)))
+				this.vertices.push((j+1) / this.stacks)
 
-				this.normals.push(Math.cos(angle), Math.cos(Math.PI/4.0), -Math.sin(angle));
-				this.normals.push(Math.cos(angle), Math.cos(Math.PI/4.0), -Math.sin(angle));
+				this.vertices.push(Math.cos(angle * (i+1)))
+				this.vertices.push(Math.sin(angle * (i+1)))
+				this.vertices.push(j / this.stacks)
+
+
+				this.indices.push(j*this.slices*4 + i*4)
+				this.indices.push(j*this.slices*4 + i*4+1)
+				this.indices.push(j*this.slices*4 + i*4+2)
+
+				this.indices.push(j*this.slices*4 + i*4+1)
+				this.indices.push(j*this.slices*4 + i*4+3)
+				this.indices.push(j*this.slices*4 + i*4+2)
+
+				this.normals.push(Math.cos(angle - angle/2), Math.cos(Math.PI/4.0), -Math.sin(angle/2));
+				this.normals.push(Math.cos(angle - angle/2), Math.cos(Math.PI/4.0), -Math.sin(angle/2));
+				this.normals.push(Math.cos(angle - angle/2), Math.cos(Math.PI/4.0), -Math.sin(angle/2));
+				this.normals.push(Math.cos(angle - angle/2), Math.cos(Math.PI/4.0), -Math.sin(angle/2));
 			}
-
-			this.indices[this.indices.length-1] = j*this.slices*2
-			this.indices[this.indices.length-2] = j*this.slices*2 + 1
-			this.indices[this.indices.length-4] = j*this.slices*2
 		}
 
-		print (this.indices)
-		print (this.vertices)
+		console.log(this.indices)
+		console.log(this.vertices)
 
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles
