@@ -1,9 +1,11 @@
-import { CGFscene, CGFcamera, CGFaxis, CGFobject } from "../lib/CGF.js";
+import { CGFscene, CGFcamera, CGFaxis, CGFobject, CGFappearance, CGFtexture } from "../lib/CGF.js";
 import { MyDiamond } from "./MyDiamond.js";
 import { MyTriangle } from "./MyTriangle.js";
 import { MyParallelogram } from "./MyParallelogram.js";
-import { MyTriangleSmall } from "./MyTriangleSmall.js";
-import {MyTriangleBig} from "./MyTriangleBig.js";
+import { MyTriangleSmall1 } from "./MyTriangleSmall1.js";
+import {MyTriangleBig1} from "./MyTriangleBig1.js";
+import { MyTriangleSmall2 } from "./MyTriangleSmall2.js";
+import {MyTriangleBig2} from "./MyTriangleBig2.js";
 
 
 /**
@@ -15,14 +17,23 @@ export class MyTangram extends CGFobject {
     super(scene);
     this.diamond = new MyDiamond(this.scene);
     this.triangle1 = new MyTriangle(this.scene);
-    this.bigTriangle1 = new MyTriangleBig(this.scene);
-    this.bigTriangle2 = new MyTriangleBig(this.scene);
-    this.smallTriangle1 = new MyTriangleSmall(this.scene);
-    this.smallTriangle2 = new MyTriangleSmall(this.scene);
+    this.bigTriangle1 = new MyTriangleBig1(this.scene);
+    this.bigTriangle2 = new MyTriangleBig2(this.scene);
+    this.smallTriangle1 = new MyTriangleSmall1(this.scene);
+    this.smallTriangle2 = new MyTriangleSmall2(this.scene);
     this.parallelogram = new MyParallelogram(this.scene);
+
+    this.tangramMaterial = new CGFappearance(this.scene);
+    this.tangramMaterial.setAmbient(1, 1, 1, 1);
+    this.tangramMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+    this.tangramMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+    this.tangramMaterial.setShininess(1.0);
+    this.tangramMaterial.loadTexture('images/tangram.png');
+    this.tangramMaterial.setTextureWrap('REPEAT', 'REPEAT');
 }
 
   display() {
+    this.tangramMaterial.apply()
 
     //Translate Diamond
     this.scene.pushMatrix();

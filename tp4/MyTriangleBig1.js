@@ -1,10 +1,10 @@
 import {CGFobject} from '../lib/CGF.js';
 /**
- * MyTriangleSmall
+ * MyTriangleBig
  * @constructor
  * @param scene - Reference to MyScene object
  */
-export class MyTriangleSmall extends CGFobject {
+export class MyTriangleBig1 extends CGFobject {
 	constructor(scene) {
 		super(scene);
 		this.initBuffers();
@@ -12,14 +12,20 @@ export class MyTriangleSmall extends CGFobject {
 	
 	initBuffers() {
 		this.vertices = [
-			-1, 0, 0,	//0
-			1,  0, 0,	//1
-			0, 1, 0,	//2
+			-2, 0, 0,	//0
+			2,  0, 0,	//1
+			0, 2, 0,	//2
 		];
 
 		//Counter-clockwise reference of vertices
 		this.indices = [
 			0, 1, 2
+		];
+
+		this.texCoords=[
+			1, 0,
+			0, 0,
+			0.5, 0.5
 		];
 
 		//The defined indices (and corresponding vertices)
