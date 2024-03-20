@@ -90,7 +90,8 @@ export class ShaderScene extends CGFscene {
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/sepia.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/convolution.frag"),
 			new CGFshader(this.gl,"shaders/twoColors.vert","shaders/twoColors.frag"),
-			new CGFshader(this.gl,"shaders/water.vert","shaders/water.frag")
+			new CGFshader(this.gl,"shaders/water.vert","shaders/water.frag"),
+			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/grayscale.frag")
 		];
 
 		// additional texture will have to be bound to texture unit 1 later, when using the shader, with "this.texture2.bind(1);"
@@ -115,7 +116,8 @@ export class ShaderScene extends CGFscene {
 			'Sepia': 7,
 			'Convolution': 8,
 			'Two Colors' : 9,
-			'Water' : 10
+			'Water' : 10,
+			'Grayscale' : 11
 		};
 
 		// shader code panels references
