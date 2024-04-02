@@ -1,6 +1,7 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyPlane } from "./objects/MyPlane.js";
 import { MySkySphere } from "./objects/MySkySphere.js";
+import { MyPanorama } from "./objects/MyPanorama.js";
 
 /**
  * MyScene

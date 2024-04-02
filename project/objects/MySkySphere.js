@@ -14,11 +14,6 @@ export class MySkySphere extends CGFobject {
     display() {
         this.scene.pushMatrix()
         this.material.apply()
-        
-        
-        if (this.scene.infinitePanorama)
-            this.scene.translate(this.scene.camera.position[0], this.scene.camera.position[1], this.scene.camera.position[2])
-
         this.sphere.display()
         this.scene.popMatrix()
     }
