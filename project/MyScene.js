@@ -2,6 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyPlane } from "./objects/MyPlane.js";
 import { MySkySphere } from "./objects/MySkySphere.js";
 import { MyPanorama } from "./objects/MyPanorama.js";
+import { MyRock } from "./objects/MyRock.js";
 
 /**
  * MyScene
@@ -41,7 +42,8 @@ export class MyScene extends CGFscene {
     this.terrainAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
     this.skysphere = new MySkySphere(this, new CGFtexture(this, "images/earth.jpg"))
-    this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama.jpg"))
+    this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama4.jpg"))
+    this.rock = new MyPanorama(this, new CGFtexture(this, "images/.jpg"))
 
   }
   initLights() {
