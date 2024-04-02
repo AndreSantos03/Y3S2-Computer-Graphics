@@ -24,7 +24,7 @@ export class MyRock extends CGFobject {
         for (let h = 0; h <= this.stacks * 2; h += 1) {
             angle = - Math.PI / 2 + Math.PI * h / (2 * this.stacks);
             this.vertices.push(this.radius * Math.cos(angle), this.radius * Math.sin(angle), 0);
-            this.normals.push(this.inside * Math.cos(angle) + Math.random(), this.inside * Math.sin(angle) + Math.random(),  Math.random());
+            this.normals.push(this.inside * Math.cos(angle), this.inside * Math.sin(angle), 0);
             this.texCoords.push(0, 1 - h / (this.stacks * 2));
         }
 
