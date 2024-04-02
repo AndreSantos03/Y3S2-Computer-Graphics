@@ -40,8 +40,8 @@ export class MyScene extends CGFscene {
     this.terrainAppearance.setTexture(this.terrainTexture);
     this.terrainAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
-    this.skyTexture = new CGFtexture(this, "images/earth.jpg");
-    this.skysphere = new MySkySphere(this, this.skyTexture)
+    this.skysphere = new MySkySphere(this, new CGFtexture(this, "images/earth.jpg"))
+    this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama.jpg"))
 
   }
   initLights() {
@@ -91,6 +91,10 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     this.skysphere.display();
+    this.popMatrix();
+
+    this.pushMatrix();
+    this.panorama.display();
     this.popMatrix();
 
     // ---- END Primitive drawing section

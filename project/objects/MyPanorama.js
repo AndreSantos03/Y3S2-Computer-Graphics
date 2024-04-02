@@ -1,13 +1,14 @@
 import { CGFobject, CGFappearance } from '../../lib/CGF.js';
 import { MySphere } from './MySphere.js';
 
-export class MyPanoram extends CGFobject {
+export class MyPanorama extends CGFobject {
 
     constructor(scene, texture) {
         super(scene)
         this.sphere = new MySphere(this.scene, 200, 30, 30, true)
         this.material = new CGFappearance(this.scene)
         this.material.setEmission(1, 1, 1, 1)
+        this.material.setTextureWrap('REPEAT', 'REPEAT');
         this.material.setTexture(texture)
     }
 
