@@ -1,5 +1,9 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
+<<<<<<< HEAD
 import { MyPlane } from "./objects/MyPlane.js";
+=======
+import { MyPlane } from "./MyPlane.js";
+>>>>>>> master
 
 /**
  * MyScene
