@@ -4,6 +4,7 @@ import { MySkySphere } from "./objects/MySkySphere.js";
 import { MyPanorama } from "./objects/MyPanorama.js";
 import { MyRock } from "./objects/MyRock.js";
 
+import { MyFlower } from "./objects/MyFlower.js";
 /**
  * MyScene
  * @constructor
@@ -45,6 +46,8 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama4.jpg"))
     this.rock = new MyPanorama(this, new CGFtexture(this, "images/.jpg"))
 
+
+    this.flower = new MyFlower(this,0,0,0);
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -82,6 +85,8 @@ export class MyScene extends CGFscene {
     if (this.displayAxis) this.axis.display();
 
     // ---- BEGIN Primitive drawing section
+
+    this.flower.display();
 
     this.pushMatrix();
     this.terrainAppearance.apply();
