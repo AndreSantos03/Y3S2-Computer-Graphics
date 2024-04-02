@@ -96,9 +96,9 @@ export class MyScene extends CGFscene {
     this.plane.display();
     this.popMatrix();
 
-    this.pushMatrix();
+/*     this.pushMatrix();
     this.skysphere.display();
-    this.popMatrix();
+    this.popMatrix(); */
 
     this.pushMatrix();
     this.panorama.display();
