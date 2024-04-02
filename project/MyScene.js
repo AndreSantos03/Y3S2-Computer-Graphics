@@ -1,5 +1,6 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
 import { MyPlane } from "./objects/MyPlane.js";
+import { MySkySphere } from "./objects/MySkySphere.js";
 
 /**
  * MyScene
@@ -33,10 +34,13 @@ export class MyScene extends CGFscene {
 
     this.enableTextures(true);
 
-this.texture = new CGFtexture(this, "images/terrain.jpg");
-this.appearance = new CGFappearance(this);
-this.appearance.setTexture(this.texture);
-this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.terrainTexture = new CGFtexture(this, "images/terrain.jpg");
+    this.terrainAppearance = new CGFappearance(this);
+    this.terrainAppearance.setTexture(this.terrainTexture);
+    this.terrainAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.skyTexture = new CGFtexture(this, "images/earth.jpg");
+    this.skysphere = new MySkySphere(this, this.skyTexture)
 
   }
   initLights() {
@@ -77,11 +81,15 @@ this.appearance.setTextureWrap('REPEAT', 'REPEAT');
     // ---- BEGIN Primitive drawing section
 
     this.pushMatrix();
-    this.appearance.apply();
+    this.terrainAppearance.apply();
     this.translate(0,-100,0);
     this.scale(400,400,400);
     this.rotate(-Math.PI/2.0,1,0,0);
     this.plane.display();
+    this.popMatrix();
+
+    this.pushMatrix();
+    this.skysphere.display();
     this.popMatrix();
 
     // ---- END Primitive drawing section
