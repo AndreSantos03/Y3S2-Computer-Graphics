@@ -85,7 +85,7 @@ export class MyScene extends CGFscene {
     if (this.displayAxis) this.axis.display();
 
     // ---- BEGIN Primitive drawing section
-
+ 
     this.flower.display();
 
     this.pushMatrix();
