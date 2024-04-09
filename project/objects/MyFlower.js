@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import {CGFappearance, CGFobject, CGFtexture} from "../../lib/CGF.js";
 import { MySphere } from "./MySphere.js";
 import { MyTriangle } from "./MyTriangle.js";
@@ -58,3 +59,14 @@ export class MyFlower extends CGFobject{
         }
     }
 }
+=======
+// import {CGFappearance, CGFobject, CGFtexture} from "../../lib/CGF.js";
+
+
+// export class MyFlower extends CGFobject{
+//     constructor(scene,x,y,z){
+//         super.scene = scene
+//         this.base = 
+//     }
+// }
+>>>>>>> Stashed changes
