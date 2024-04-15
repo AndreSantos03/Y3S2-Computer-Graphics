@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 import {CGFappearance, CGFobject, CGFtexture} from "../../lib/CGF.js";
 import { MySphere } from "./MySphere.js";
 import { MyTriangle } from "./MyTriangle.js";
@@ -8,7 +7,7 @@ export class MyFlower extends CGFobject{
     constructor(scene,x,y,z){
         super(scene);
         this.stem = new MyCylinder(scene,10,10);
-        this.disk = new MySphere(scene,1,10,5);
+        this.disk = new MySphere(scene,1,10,10);
         this.florets = [];
         for(let i = 0; i < 6; i++){
             let floret = [new MyTriangle(scene),new MyTriangle(scene)];
@@ -21,22 +20,22 @@ export class MyFlower extends CGFobject{
     }
 
     draw(){
-        //Stem
+/*         //Stem
         this.scene.pushMatrix();
         this.scene.translate(0,4,0);
         this.scene.rotate(Math.PI/2,1,0,0);
         this.scene.scale(0.3,0.3,4);
-        // this.stem.display();
-        this.scene.popMatrix();
+        this.stem.display();
+        this.scene.popMatrix(); */
 
         // //Disk
         this.scene.pushMatrix();
-        this.scene.translate(0.5,4,0);
-        this.scene.scale(1,1,1);
-        // this.disk.display();
+        // this.scene.translate(0.5,4,0);
+        // this.scene.scale(1,1,1);
+        this.disk.display();
         this.scene.popMatrix();
-
-        // //FLorets
+/* 
+        //FLorets
         for (let i = 0; i < 6; i++) {
             var floret = this.florets[i]; 
             var firstTriangle = floret[0];
@@ -56,17 +55,6 @@ export class MyFlower extends CGFobject{
             this.scene.rotate(Math.PI/4,0,0,1);//rotate it upwards
             secondTriangle.display();
             this.scene.popMatrix();
-        }
+        } */
     }
 }
-=======
-// import {CGFappearance, CGFobject, CGFtexture} from "../../lib/CGF.js";
-
-
-// export class MyFlower extends CGFobject{
-//     constructor(scene,x,y,z){
-//         super.scene = scene
-//         this.base = 
-//     }
-// }
->>>>>>> Stashed changes

@@ -98,17 +98,17 @@ export class MyScene extends CGFscene {
 /*     this.pushMatrix();
     this.skysphere.display();
     this.popMatrix(); */
-
+/* 
     this.pushMatrix();
     this.panorama.display();
-    this.popMatrix();
+    this.popMatrix(); */
 
-
+/* 
     this.pushMatrix();
     this.a = new CGFappearance(this);
     this.a.apply()
     this.rock.display();
-    this.popMatrix();
+    this.popMatrix(); */
 
     // ---- END Primitive drawing section
   }
