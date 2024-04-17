@@ -45,7 +45,7 @@ export class MyScene extends CGFscene {
 
     this.skysphere = new MySkySphere(this, new CGFtexture(this, "images/earth.jpg"))
     this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama4.jpg"))
-    this.rock = new MyRock(this, 1, 5, 5)
+    this.rock = new MyRock(this, 1, 20, 20)
 
     this.flower = new MyFlower(this,0,0,0);
   }

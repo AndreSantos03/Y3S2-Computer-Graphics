@@ -2,63 +2,72 @@ import { CGFobject } from '../../lib/CGF.js';
 
 export class MyRock extends CGFobject {
 
-    constructor(scene, radius, slices, stacks, inside=false, north=1, south=1) {
+    constructor(scene, radius, slices, stacks, inside=false) {
         super(scene);
         this.radius = radius;
         this.slices = slices;
-        this.stacks = stacks;
-        this.inside = inside ? -1 : 1;
-        this.north = north;
-        this.south = south;
+        this.stacks = stacks * 2;
+        this.inside = inside;
         this.initBuffers();
     }
 
     initBuffers() {
+
+        var i, ai, si, ci;
+        var j, aj, sj, cj;
+        var p1, p2;
 
         this.vertices = [];
         this.indices = [];
         this.normals = [];
         this.texCoords = [];
 
-        let angle;
-        for (let h = 0; h <= this.stacks * 2; h += 1) {
-            angle = - Math.PI / 2 + Math.PI * h / (2 * this.stacks);
-            this.vertices.push(this.radius * Math.cos(angle), this.radius * Math.sin(angle), 0);
-            this.normals.push(this.inside * Math.cos(angle), this.inside * Math.sin(angle), 0);
-            this.texCoords.push(0, 1 - h / (this.stacks * 2));
+        for (j = 0; j <= this.stacks; j++) 
+        {
+            aj = j * Math.PI / this.stacks;
+            sj = Math.sin(aj);
+            cj = Math.cos(aj);
+            for (i = 0; i <= this.slices; i++) 
+            {
+                ai = i * 2 * Math.PI / this.slices;
+                si = Math.sin(ai);
+                ci = Math.cos(ai);
+                this.vertices.push(si * sj * this.radius);  // X
+                this.vertices.push(cj * this.radius);       // Y
+                this.vertices.push(ci * sj * this.radius);  // Z
+
+                this.normals.push(si * sj * 1.0 / this.radius);  // X
+                this.normals.push(cj * 1.0 / this.radius);       // Y
+                this.normals.push(ci * sj * 1.0 / this.radius);  // Z
+
+                this.texCoords.push(i / this.slices);
+                this.texCoords.push(j / this.stacks);
+            }
         }
 
-        let angleXZ, angleXY, x, y, z, points, indexA, indexB, indexC, indexD, y_factor;
-        for (let i = 1; i <= this.slices + 1; i++) {
-
-            angleXZ = 2 * Math.PI * i / this.slices;
-
-            this.vertices.push(0, -this.radius , 0);
-            this.texCoords.push(0, 1);
-            this.normals.push(0, this.inside, 0);
-
-            for (let j = 0; j <= this.stacks * 2; j++) {
-
-                angleXY = - Math.PI / 2 + Math.PI * j / (2 * this.stacks);
-                y_factor = angleXY >= 0 ? this.north : this.south;
-
-                x = Math.cos(angleXZ) * Math.cos(angleXY);
-                z = Math.sin(angleXZ) * Math.cos(angleXY);
-                y = Math.sin(angleXY);
-                
-                this.vertices.push(this.radius * x, this.radius * y * y_factor, this.radius * z);
-                this.normals.push(this.inside * x, this.inside * y, this.inside * z);
-                this.texCoords.push(i / this.slices, 1 - j / (this.stacks * 2));
-                points = this.vertices.length / 3;
-                indexC = points - 2;
-                indexD = points - 1;
-                indexB = indexD - (this.stacks*2 + 1);
-                indexA = indexB - 1;
-
-                if (this.inside == -1) {
-                    this.indices.push(indexA, indexC, indexD, indexA, indexD, indexB);
-                } else {
-                    this.indices.push(indexD, indexC, indexA, indexB, indexD, indexA);
+        for (j = 0; j < this.stacks; j++)
+        {
+            for (i = 0; i < this.slices; i++)
+            {
+                p1 = j * (this.slices+1) + i;
+                p2 = p1 + (this.slices+1);
+                if (this.inside)
+                {
+                    this.indices.push(p1);
+                    this.indices.push(p1 + 1);
+                    this.indices.push(p2);
+                    this.indices.push(p1 + 1);
+                    this.indices.push(p2 + 1);
+                    this.indices.push(p2);
+                }
+                else
+                {
+                    this.indices.push(p1);
+                    this.indices.push(p2);
+                    this.indices.push(p1 + 1);
+                    this.indices.push(p1 + 1);
+                    this.indices.push(p2);
+                    this.indices.push(p2 + 1);
                 }
             }
         }
