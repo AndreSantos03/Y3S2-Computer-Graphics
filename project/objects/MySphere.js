@@ -32,9 +32,13 @@ export class MySphere extends CGFobject {
                 ai = i * 2 * Math.PI / this.slices;
                 si = Math.sin(ai);
                 ci = Math.cos(ai);
-                this.vertices.push(si * sj * this.radius);  // X
-                this.vertices.push(cj * this.radius);       // Y
-                this.vertices.push(ci * sj * this.radius);  // Z
+                var x = si * sj * this.radius
+                var y = cj * this.radius;
+                var z = ci * sj * this.radius;
+
+                this.vertices.push(x);  // X
+                this.vertices.push(y);       // Y
+                this.vertices.push(z);  // Z
 
                 this.normals.push(si * sj * 1.0 / this.radius);  // X
                 this.normals.push(cj * 1.0 / this.radius);       // Y
@@ -49,8 +53,8 @@ export class MySphere extends CGFobject {
         {
             for (i = 0; i < this.slices; i++)
             {
-                p1 = j * (this.slices+1) + i;
-                p2 = p1 + (this.slices+1);
+                p1 = j * (this.slices + 1 ) + i;
+                p2 = p1 + (this.slices + 1 );
                 if (this.inside)
                 {
                     this.indices.push(p1);

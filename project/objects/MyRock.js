@@ -27,30 +27,34 @@ export class MyRock extends CGFobject {
             aj = j * Math.PI / this.stacks;
             sj = Math.sin(aj);
             cj = Math.cos(aj);
-            for (i = 0; i <= this.slices; i++) 
+            for (i = 0; i < this.slices; i++) 
             {
                 ai = i * 2 * Math.PI / this.slices;
                 si = Math.sin(ai);
                 ci = Math.cos(ai);
-                this.vertices.push(si * sj * this.radius);  // X
-                this.vertices.push(cj * this.radius);       // Y
-                this.vertices.push(ci * sj * this.radius);  // Z
+                var x = si * sj * this.radius
+                var y = cj * this.radius;
+                var z = ci * sj * this.radius;
+
+                this.vertices.push(x +  Math.random() * x / (this.radius*3));  // X
+                this.vertices.push(y +  Math.random() * y / (this.radius*3));       // Y
+                this.vertices.push(z +  Math.random() * z / (this.radius*3));  // Z
 
                 this.normals.push(si * sj * 1.0 / this.radius);  // X
                 this.normals.push(cj * 1.0 / this.radius);       // Y
                 this.normals.push(ci * sj * 1.0 / this.radius);  // Z
 
-                this.texCoords.push(i / this.slices);
+                this.texCoords.push(i / (this.slices - 1));
                 this.texCoords.push(j / this.stacks);
             }
         }
 
         for (j = 0; j < this.stacks; j++)
         {
-            for (i = 0; i < this.slices; i++)
+            for (i = 0; i < this.slices - 1; i++)
             {
-                p1 = j * (this.slices+1) + i;
-                p2 = p1 + (this.slices+1);
+                p1 = j * (this.slices) + i;
+                p2 = p1 + (this.slices);
                 if (this.inside)
                 {
                     this.indices.push(p1);
@@ -68,6 +72,31 @@ export class MyRock extends CGFobject {
                     this.indices.push(p1 + 1);
                     this.indices.push(p2);
                     this.indices.push(p2 + 1);
+                }
+            }
+
+            if (this.inside)
+            {
+                this.indices.push(j * this.slices);
+                this.indices.push((j + 1 ) * this.slices);
+                this.indices.push((j + 2 ) * this.slices - 1);
+                if (j != 0)
+                {
+                    this.indices.push(j * this.slices);
+                    this.indices.push((j + 2 ) * this.slices - 1);
+                    this.indices.push((j + 1) * this.slices - 1);
+                }
+            }
+            else
+            {
+                this.indices.push(j * this.slices);
+                this.indices.push((j + 2 ) * this.slices - 1);
+                this.indices.push((j + 1 ) * this.slices);
+                if (j != 0)
+                {
+                    this.indices.push(j * this.slices);
+                    this.indices.push((j + 1) * this.slices - 1);
+                    this.indices.push((j + 2 ) * this.slices - 1);
                 }
             }
         }
