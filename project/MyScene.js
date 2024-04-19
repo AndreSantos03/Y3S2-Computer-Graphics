@@ -47,7 +47,7 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama4.jpg"))
     this.rock = new MyRock(this, 1, 20, 20)
 
-    this.flower = new MyFlower(this,0,0,0);
+    this.flower = new MyFlower(this);
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
