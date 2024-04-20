@@ -4,7 +4,7 @@ import { MyTriangle } from "./MyTriangle.js";
 import { MyCylinder } from "./MyCylinder.js";
 
 export class MyFlower extends CGFobject{
-    constructor(scene,flowerRadius=0.8,numberFlorets=6,floretsColor = [1, 1, 1, 1],diskRadius=0.8,diskColor=[1, 1, 0, 1],stemRadius,stemSize,leavesColor){
+    constructor(scene,flowerRadius=0.8,numberFlorets=6,floretsColor = '#FFFFFF',diskRadius=0.8,diskColor = '#FFFF00',stemRadius = 1,stemSize=1,stemColor='#4eb300'){
         super(scene);
         this.stem = new MyCylinder(scene,10,10);
         this.disk = new MySphere(scene,diskRadius,10,10);
@@ -14,14 +14,16 @@ export class MyFlower extends CGFobject{
             this.florets.push(floret);
         }
         
+        console.log("disc color = " + diskColor)
+
         this.flowerRadius = flowerRadius;
         this.numberFlorets = numberFlorets;
-        this.floretsColor = floretsColor;
+        this.floretsColor = hexToRgb(floretsColor);
         this.diskRadius = diskRadius;
-        this.diskColor = diskColor;
+        this.diskColor = hexToRgb(diskColor);
         this.stemRadius = stemRadius;
         this.stemSize = stemSize;
-        this.leavesColor = leavesColor;
+        this.stemColor = hexToRgb(stemColor);
 
 
         this.initMaterials();
@@ -35,15 +37,15 @@ export class MyFlower extends CGFobject{
 
         // Stem material
         this.stemMaterial = new CGFappearance(this.scene);
-        this.stemMaterial.setAmbient(...stemColor.map(c => c * 0.2));
-        this.stemMaterial.setDiffuse(...stemColor);
+        this.stemMaterial.setAmbient(...this.stemColor.map(c => c * 0.2));
+        this.stemMaterial.setDiffuse(...this.stemColor);
         this.stemMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.stemMaterial.setShininess(10);
 
         // Disk material
         this.diskMaterial = new CGFappearance(this.scene);
-        this.diskMaterial.setAmbient(...diskColor.map(c => c * 0.2));
-        this.diskMaterial.setDiffuse(...diskColor);
+        this.diskMaterial.setAmbient(...this.diskColor.map(c => c * 0.2));
+        this.diskMaterial.setDiffuse(...this.diskColor);
         this.diskMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.diskMaterial.setShininess(10);
 
@@ -63,16 +65,16 @@ export class MyFlower extends CGFobject{
     draw(){
         //Stem
         this.scene.pushMatrix();
-        this.scene.translate(0,4,0);
+        this.scene.translate(0,this.stemSize * 4,0);
         this.scene.rotate(Math.PI/2,1,0,0);
-        this.scene.scale(0.3,0.3,4);
+        this.scene.scale(this.stemRadius * 0.2,this.stemRadius * 0.2,this.stemSize *4);
         this.stemMaterial.apply();
         this.stem.display();
         this.scene.popMatrix();
 
-        // //Disk
+        //Disk
         this.scene.pushMatrix();
-        this.scene.translate(0,4,0.5);
+        this.scene.translate(0,4*this.stemSize,0.5);
         this.scene.scale(1,1,1);
         this.diskMaterial.apply();
         this.disk.display();
@@ -87,7 +89,7 @@ export class MyFlower extends CGFobject{
 
             // First Petal
             this.scene.pushMatrix();  
-            this.scene.translate(0,4,0.5);
+            this.scene.translate(0,this.stemSize*4,0.5);
             this.scene.rotate(angle, 0, 0, 1); // rotate to be around the flower
             this.scene.scale(this.flowerRadius/4,this.flowerRadius, 0); // Scale flower
             this.scene.rotate(5 * Math.PI / 4, 0, 0, 1); // Rotate it upwards
@@ -99,7 +101,7 @@ export class MyFlower extends CGFobject{
 
             // // //Second Petal
             this.scene.pushMatrix();
-            this.scene.translate(0,4,0.5);
+            this.scene.translate(0,this.stemSize * 4,0.5);
             this.scene.rotate(angle,0,0,1);
             this.scene.scale(this.flowerRadius/4,this.flowerRadius,0); //scale flower
             this.scene.rotate(Math.PI/4,0,0,1);//rotate it downwards
@@ -109,4 +111,17 @@ export class MyFlower extends CGFobject{
             this.scene.popMatrix();
         }
     }
+
+}
+function hexToRgb(hex) {
+    // Remove '#' if present
+    hex = hex.replace(/^#/, '');
+
+    // Convert hex to RGB
+    let bigint = parseInt(hex, 16);
+    let r = (bigint >> 16) & 255;
+    let g = (bigint >> 8) & 255;
+    let b = bigint & 255;
+
+    return [r / 255, g / 255, b / 255, 1];
 }
