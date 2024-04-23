@@ -138,10 +138,13 @@ export class MyFlower extends CGFobject{
 
             // // //Second Petal
             this.scene.pushMatrix();
-            this.scene.translate(0,stemLength,0.2);
+            this.scene.translate(0,stemLength,0);
             this.scene.rotate(angle,0,0,1);
             this.scene.scale(this.flowerRadius/4,this.flowerRadius,1); //scale flower
+            this.scene.rotate(-Math.PI/20,1,0,0); //add slight tilt to petals
+
             this.scene.rotate(Math.PI/4,0,0,1);//rotate it downwards
+
             this.scene.translate(-1, -1, 0); // Translate the petal onto the side of the of disk
             this.floretMaterial.apply();
             secondTriangle.display();
