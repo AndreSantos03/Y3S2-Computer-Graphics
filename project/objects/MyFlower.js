@@ -91,7 +91,7 @@ export class MyFlower extends CGFobject{
             this.scene.pushMatrix();  
             this.scene.translate(0,this.stemSize*4,0.5);
             this.scene.rotate(angle, 0, 0, 1); // rotate to be around the flower
-            this.scene.scale(this.flowerRadius/4,this.flowerRadius, 0); // Scale flower
+            this.scene.scale(this.flowerRadius/4,this.flowerRadius, 1); // Scale flower
             this.scene.rotate(5 * Math.PI / 4, 0, 0, 1); // Rotate it upwards
             this.scene.translate(1,1,0);// Translate the petal onto the side of the of disk
             this.floretMaterial.apply();
@@ -103,7 +103,7 @@ export class MyFlower extends CGFobject{
             this.scene.pushMatrix();
             this.scene.translate(0,this.stemSize * 4,0.5);
             this.scene.rotate(angle,0,0,1);
-            this.scene.scale(this.flowerRadius/4,this.flowerRadius,0); //scale flower
+            this.scene.scale(this.flowerRadius/4,this.flowerRadius,1); //scale flower
             this.scene.rotate(Math.PI/4,0,0,1);//rotate it downwards
             this.scene.translate(-1, -1, 0); // Translate the petal onto the side of the of disk
             this.floretMaterial.apply();

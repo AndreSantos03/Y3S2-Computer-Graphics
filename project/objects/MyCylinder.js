@@ -51,9 +51,6 @@ export class MyCylinder extends CGFobject {
 			this.indices[this.indices.length-4] = j*this.slices*2
 		}
 
-		console.log(this.indices)
-		console.log(this.vertices)
-
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles
 		this.primitiveType = this.scene.gl.TRIANGLES;
