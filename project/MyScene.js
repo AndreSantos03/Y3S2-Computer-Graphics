@@ -3,6 +3,7 @@ import { MyPlane } from "./objects/MyPlane.js";
 import { MySkySphere } from "./objects/MySkySphere.js";
 import { MyPanorama } from "./objects/MyPanorama.js";
 import { MyRock } from "./objects/MyRock.js";
+import { MyRockSet } from "./objects/MyRockSet.js";
 
 import { MyFlower } from "./objects/MyFlower.js";
 import { MySphere } from "./objects/MySphere.js";
@@ -46,6 +47,8 @@ export class MyScene extends CGFscene {
     this.skysphere = new MySkySphere(this, new CGFtexture(this, "images/earth.jpg"))
     this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama4.jpg"))
     this.rock = new MyRock(this, 1, 20, 20)
+    this.rockset = new MyRockSet(this)
+    this.rockAppearance = new CGFappearance(this);
 
     this.flower = new MyFlower(this,0,0,0);
   }
@@ -106,9 +109,8 @@ export class MyScene extends CGFscene {
 
 
     this.pushMatrix();
-    this.a = new CGFappearance(this);
-    this.a.apply()
-    this.rock.display();
+    this.rockAppearance.apply()
+    this.rockset.display();
     this.popMatrix();
 
     // ---- END Primitive drawing section
