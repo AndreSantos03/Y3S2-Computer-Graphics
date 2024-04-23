@@ -4,9 +4,16 @@ import { MyTriangle } from "./MyTriangle.js";
 import { MyCylinder } from "./MyCylinder.js";
 
 export class MyFlower extends CGFobject{
-    constructor(scene,flowerRadius=0.8,numberFlorets=6,floretsColor = '#FFFFFF',diskRadius=0.8,diskColor = '#FFFF00',stemRadius = 1,stemSize=1,stemColor='#4eb300'){
+    constructor(scene,flowerRadius=0.8,numberFlorets=6,floretsColor = '#FFFFFF',diskRadius=0.8,diskColor = '#FFFF00',stemRadius = 1,stemSize=4,stemColor='#4eb300'){
         super(scene);
-        this.stem = new MyCylinder(scene,10,10);
+        this.stems = [];
+        this.stemsAngles = [];
+        var maxStemAngle = Math.PI / 8;
+        for(let i = 0; i < stemSize; i++){
+            let stem = [new MyCylinder(scene,10,10)];
+            this.stems.push(stem);
+            this.stemsAngles.push([Math.random() * maxStemAngle]);
+        }
         this.disk = new MySphere(scene,diskRadius,10,10);
         this.florets = [];
         for(let i = 0; i < 6; i++){
@@ -14,7 +21,7 @@ export class MyFlower extends CGFobject{
             this.florets.push(floret);
         }
         
-        console.log("disc color = " + diskColor)
+
 
         this.flowerRadius = flowerRadius;
         this.numberFlorets = numberFlorets;
