@@ -98,7 +98,7 @@ export class MyFlower extends CGFobject{
             //draw the leave for each intersection
             if(i + 1 != this.stems.length){
                 this.scene.pushMatrix();
-                let aroundCaleAngle = (i % 2 === 0) ? Math.PI / 4 : Math.PI * 5 / 4; // so it switches side in intersection
+                let aroundCaleAngle = (i % 2 === 0) ? Math.PI / 2 : Math.PI; // so it switches side in intersection
                 this.scene.rotate(aroundCaleAngle,0,1,0);
                 this.scene.rotate(Math.PI/2,1,0,0);//rotate so its parralel to xz
                 this.scene.scale(0.3,0.3,1);
