@@ -11,7 +11,7 @@ export class MyFlower extends CGFobject{
         
         this.stems = [];
         this.stemsAngles = [];
-        var maxStemAngle = Math.PI / 40;
+        var maxStemAngle = Math.PI / 100;
         for(let i = 0; i < stemSize; i++){
             let stem = new MyCylinder(scene,10,10);
             this.stems.push(stem);
@@ -87,6 +87,7 @@ export class MyFlower extends CGFobject{
         for (let i = 0; i < this.stems.length; i++) {
             var stem = this.stems[i];
             var angle = this.stemsAngles[i];
+            console.log(angle)
             this.scene.pushMatrix();
             this.scene.translate(0,1 + i,0);
             this.scene.rotate(angle,0,0,1);
