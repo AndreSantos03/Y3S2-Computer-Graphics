@@ -53,6 +53,10 @@ export class MyFlower extends CGFobject{
         this.stemMaterial.setDiffuse(this.stemColor[0], this.stemColor[1], this.stemColor[2],1);
         this.stemMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.stemMaterial.setShininess(10);
+        this.stemTexture = new CGFtexture(this.scene, "./images/stemTexture.jpg");
+        this.stemMaterial.setTexture(this.stemTexture);
+        this.stemMaterial.setTextureWrap('REPEAT', 'REPEAT');
+
 
         // Disk material
         this.diskMaterial = new CGFappearance(this.scene);
@@ -60,6 +64,9 @@ export class MyFlower extends CGFobject{
         this.diskMaterial.setDiffuse(this.diskColor[0], this.diskColor[1], this.diskColor[2]);
         this.diskMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.diskMaterial.setShininess(10);
+        this.diskTexture = new CGFtexture(this.scene, "./images/diskTexture.jpg");
+        this.diskMaterial.setTexture(this.diskTexture);
+        this.diskMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
         // Florets material
         this.floretMaterial = new CGFappearance(this.scene);
@@ -67,13 +74,19 @@ export class MyFlower extends CGFobject{
         this.floretMaterial.setDiffuse(this.floretsColor[0], this.floretsColor[1], this.floretsColor[2]);
         this.floretMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.floretMaterial.setShininess(10);
+        this.floretTexture = new CGFtexture(this.scene, "./images/petalTexture.jpg");
+        this.floretMaterial.setTexture(this.floretTexture);
+        this.floretMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
         // Leaves material
-        this.leaveMaterial = new CGFappearance(this.scene);
-        this.leaveMaterial.setAmbient(this.leavesColor[0] * 0.2, this.leavesColor[1] * 0.2, this.leavesColor[2] * 0.2,this.leavesColor[3]);
-        this.leaveMaterial.setDiffuse(this.leavesColor[0], this.leavesColor[1], this.leavesColor[2]);
-        this.leaveMaterial.setSpecular(0.1, 0.1, 0.1, 1);
-        this.leaveMaterial.setShininess(10);
+        this.leafMaterial = new CGFappearance(this.scene);
+        this.leafMaterial.setAmbient(this.leavesColor[0] * 0.2, this.leavesColor[1] * 0.2, this.leavesColor[2] * 0.2,this.leavesColor[3]);
+        this.leafMaterial.setDiffuse(this.leavesColor[0], this.leavesColor[1], this.leavesColor[2]);
+        this.leafMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.leafMaterial.setShininess(10);
+        this.leafTexture = new CGFtexture(this.scene, "./images/leafTexture.jpg");
+        this.leafMaterial.setTexture(this.leafTexture);
+        this.leafMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
     }
 
@@ -106,7 +119,7 @@ export class MyFlower extends CGFobject{
                 this.scene.rotate(Math.PI/2,1,0,0);//rotate so its parralel to xz
                 this.scene.scale(0.3,0.3,1);
                 this.scene.translate(1,1,-1 -i);
-                this.leaveMaterial.apply();
+                this.leafMaterial.apply();
                 this.leave.display();
                 this.scene.popMatrix();
             }

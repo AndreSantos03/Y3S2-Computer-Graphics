@@ -16,9 +16,10 @@ export class MyCylinder extends CGFobject {
 	}
 	
 	initBuffers() {
-		this.vertices = []
-		this.indices = []
-		this.normals = []
+		this.vertices = [];
+		this.indices = [];
+		this.normals = [];
+		this.texCoords = [];
 
 		var angle = 2 * Math.PI / this.slices
 
@@ -45,6 +46,8 @@ export class MyCylinder extends CGFobject {
 
 				this.normals.push(Math.cos(angle * i), Math.sin(angle * i),0);
 				this.normals.push(Math.cos(angle * i), Math.sin(angle * i),0);
+				this.texCoords.push(i / this.slices, (j + 1) / this.stacks); 
+                this.texCoords.push(i / this.slices, j / this.stacks);
 			}
 
 			this.indices[this.indices.length-1] = j*this.slices*2

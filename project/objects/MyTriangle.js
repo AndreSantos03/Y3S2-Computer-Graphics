@@ -37,12 +37,14 @@ export class MyTriangle extends CGFobject {
 
 		];
 
-		this.texCoords = [
+        this.texCoords = [
             0, 0,       
             1, 0,     
             0, 1,       
-
-		];
+            0, 0,       
+            1, 0,     
+            0, 1,       
+        ];
 		
 
 		//The defined indices (and corresponding vertices)
