@@ -5,8 +5,10 @@ import { MyPanorama } from "./objects/MyPanorama.js";
 import { MyRock } from "./objects/MyRock.js";
 import { MyRockSet } from "./objects/MyRockSet.js";
 
-import { MyFlower } from "./objects/MyFlower.js";
 import { MySphere } from "./objects/MySphere.js";
+import { MyGarden } from "./MyGarden.js";
+import { MyFlower } from "./objects/MyFlower.js";
+
 /**
  * MyScene
  * @constructor
@@ -37,6 +39,8 @@ export class MyScene extends CGFscene {
     this.displayAxis = true;
     this.scaleFactor = 1;
 
+    this.flower = new MyFlower(this);
+
     this.enableTextures(true);
 
     this.terrainTexture = new CGFtexture(this, "images/terrain.jpg");
@@ -50,7 +54,8 @@ export class MyScene extends CGFscene {
     this.rockset = new MyRockSet(this)
     this.rockAppearance = new CGFappearance(this);
 
-    this.flower = new MyFlower(this,0,0,0);
+
+    this.garden = new MyGarden(this);
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -89,7 +94,6 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    this.flower.display();
 
     this.pushMatrix();
     this.terrainAppearance.apply();
@@ -108,10 +112,12 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
 
-    this.pushMatrix();
-    this.rockAppearance.apply()
-    this.rockset.display();
-    this.popMatrix();
+    this.garden.display();
+
+    // this.pushMatrix();
+    // this.rockAppearance.apply()
+    // this.rockset.display();
+    // this.popMatrix();
 
     // ---- END Primitive drawing section
   }

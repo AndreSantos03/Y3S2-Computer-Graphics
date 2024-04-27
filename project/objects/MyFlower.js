@@ -4,8 +4,12 @@ import { MyTriangle } from "./MyTriangle.js";
 import { MyCylinder } from "./MyCylinder.js";
 
 export class MyFlower extends CGFobject{
-    constructor(scene,numberFlorets=6){
+    constructor(scene,x,y,z){
         super(scene);
+
+        this.x = x;
+        this.y = y;
+        this.z = z;
 
         this.flowerRadius = getRandomNumber(0.4,1,0.001);
         this.numberFlorets = getRandomNumber(5,12,1);
@@ -37,8 +41,6 @@ export class MyFlower extends CGFobject{
             let floret = [new MyTriangle(scene),new MyTriangle(scene)];
             this.florets.push(floret);
         }
-
- 
 
         this.initMaterials();
     }
@@ -87,7 +89,7 @@ export class MyFlower extends CGFobject{
             var stem = this.stems[i];
             var angle = this.stemsAngles[i];
             this.scene.pushMatrix();
-            this.scene.translate(0,1 + i,0);
+            this.scene.translate(this.x,1 + i + this.y,this.z);
             this.scene.rotate(angle,0,0,1);
             this.scene.rotate(Math.PI/2,1,0,0);
             this.scene.scale(this.stemRadius * 0.2,this.stemRadius * 0.2,1.1);
@@ -98,6 +100,7 @@ export class MyFlower extends CGFobject{
             //draw the leave for each intersection
             if(i + 1 != this.stems.length){
                 this.scene.pushMatrix();
+                this.scene.translate(this.x,this.y,this.z);
                 let aroundCaleAngle = (i % 2 === 0) ? Math.PI / 2 : Math.PI; // so it switches side in intersection
                 this.scene.rotate(aroundCaleAngle,0,1,0);
                 this.scene.rotate(Math.PI/2,1,0,0);//rotate so its parralel to xz
@@ -111,7 +114,7 @@ export class MyFlower extends CGFobject{
 
         //Disk
         this.scene.pushMatrix();
-        this.scene.translate(0,stemLength,0.2);
+        this.scene.translate(this.x,stemLength + this.y,0.2 + this.z);
         this.scene.scale(1,1,1);
         this.diskMaterial.apply();
         this.disk.display();
@@ -126,7 +129,7 @@ export class MyFlower extends CGFobject{
 
             // First Petal
             this.scene.pushMatrix();  
-            this.scene.translate(0,stemLength,0.2);
+            this.scene.translate(this.x,stemLength + this.y,0.2 + this.z);
             this.scene.rotate(angle, 0, 0, 1); // rotate to be around the flower
             this.scene.scale(this.flowerRadius/4,this.flowerRadius, 1); // Scale flower
             this.scene.rotate(5 * Math.PI / 4, 0, 0, 1); // Rotate it upwards
@@ -138,7 +141,7 @@ export class MyFlower extends CGFobject{
 
             // // //Second Petal
             this.scene.pushMatrix();
-            this.scene.translate(0,stemLength,0);
+            this.scene.translate(this.x,stemLength + this.y,this.z);
             this.scene.rotate(angle,0,0,1);
             this.scene.scale(this.flowerRadius/4,this.flowerRadius,1); //scale flower
             this.scene.rotate(-Math.PI/20,1,0,0); //add slight tilt to petals
@@ -153,6 +156,7 @@ export class MyFlower extends CGFobject{
     }
 
 }
+
 
 
 function getRandomNumber(min, max, precision) {
