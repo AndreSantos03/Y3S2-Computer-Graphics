@@ -5,9 +5,8 @@ import { MyPanorama } from "./objects/MyPanorama.js";
 import { MyRock } from "./objects/MyRock.js";
 import { MyRockSet } from "./objects/MyRockSet.js";
 
-import { MySphere } from "./objects/MySphere.js";
 import { MyGarden } from "./MyGarden.js";
-import { MyFlower } from "./objects/MyFlower.js";
+import { MyBee } from "./objects/MyBee.js";
 
 /**
  * MyScene
@@ -39,7 +38,8 @@ export class MyScene extends CGFscene {
     this.displayAxis = true;
     this.scaleFactor = 1;
 
-    this.flower = new MyFlower(this);
+
+    this.bee = new MyBee(this,0,0,0);
 
     this.enableTextures(true);
 
@@ -112,7 +112,10 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
 
-    this.garden.display();
+
+    this.bee.display();
+
+    // this.garden.display();
 
     // this.pushMatrix();
     // this.rockAppearance.apply()
