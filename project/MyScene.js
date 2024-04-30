@@ -50,7 +50,7 @@ export class MyScene extends CGFscene {
 
     this.skysphere = new MySkySphere(this, new CGFtexture(this, "images/earth.jpg"))
     this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama4.jpg"))
-    this.rock = new MyRock(this, 1, 20, 20)
+    this.rock1 = new MyRock(this, 1, 6, 3)
     this.rockset = new MyRockSet(this)
     this.rockAppearance = new CGFappearance(this);
 
@@ -112,12 +112,12 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
 
-    this.garden.display();
+    // this.garden.display();
 
-    // this.pushMatrix();
-    // this.rockAppearance.apply()
-    // this.rockset.display();
-    // this.popMatrix();
+    this.pushMatrix();
+    this.rockAppearance.apply()
+    this.rockset.display();
+    this.popMatrix();
 
     // ---- END Primitive drawing section
   }

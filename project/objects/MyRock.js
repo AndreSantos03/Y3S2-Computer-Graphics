@@ -36,9 +36,24 @@ export class MyRock extends CGFobject {
                 var y = cj * this.radius;
                 var z = ci * sj * this.radius;
 
-                this.vertices.push(x +  Math.random() * x / (this.radius*3));  // X
-                this.vertices.push(y +  Math.random() * y / (this.radius*3));       // Y
-                this.vertices.push(z +  Math.random() * z / (this.radius*3));  // Z
+                if (i != 0 && j == 0)
+                {
+                    this.vertices.push(this.vertices[0]);  // X
+                    this.vertices.push(this.vertices[1]);       // Y
+                    this.vertices.push(this.vertices[2]);  // Z
+                }
+                else if (i != 0 && j == this.stacks)
+                {
+                    this.vertices.push(this.vertices[this.vertices.length - 3]);  // X
+                    this.vertices.push(this.vertices[this.vertices.length - 3]);       // Y
+                    this.vertices.push(this.vertices[this.vertices.length - 3]);  // Z
+                }
+                else
+                {
+                    this.vertices.push(x +  Math.random() * x / (this.radius*3));  // X
+                    this.vertices.push(y +  Math.random() * y / (this.radius*3));       // Y
+                    this.vertices.push(z +  Math.random() * z / (this.radius*3));  // Z
+                }
 
                 this.normals.push(si * sj * 1.0 / this.radius);  // X
                 this.normals.push(cj * 1.0 / this.radius);       // Y
