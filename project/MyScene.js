@@ -44,7 +44,7 @@ export class MyScene extends CGFscene {
 
     this.pressedKeys = [];
 
-    this.bee = new MyBee(this,0,6,0,0);
+    this.bee = new MyBee(this,0,10,0,0);
   
     
     this.enableTextures(true);
@@ -62,7 +62,7 @@ export class MyScene extends CGFscene {
 
 
     this.garden = new MyGarden(this);
-
+    this.bee.setGarden(this.garden);
     this.setUpdatePeriod(50); // 60 FPS
   }
   initLights() {
@@ -129,7 +129,7 @@ export class MyScene extends CGFscene {
 
     this.bee.display();
 
-    // this.garden.display();
+    this.garden.display();
 
     // this.pushMatrix();
     // this.rockAppearance.apply()
@@ -141,7 +141,7 @@ export class MyScene extends CGFscene {
   
   update(time){
     this.checkKeys();
-    this.bee.update(time,this.pressedKeys);
+    this.bee.update(time,this.pressedKeys,this.garden);
   }
 
   checkKeys() {
@@ -163,6 +163,9 @@ export class MyScene extends CGFscene {
     if (this.gui.isKeyPressed("KeyA")) {
       this.pressedKeys.push("A");
 
+    }
+    if(this.gui.isKeyPressed("KeyF")){
+      this.pressedKeys.push("F");
     }
   }
 

@@ -92,6 +92,15 @@ export class MyFlower extends CGFobject{
         this.leafMaterial.setTexture(this.leafTexture);
         this.leafMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
+
+        this.pollenMaterial = new CGFappearance(this.scene);
+        this.pollenMaterial.setAmbient(1.0, 0.5, 0.0, 1.0);
+        this.pollenMaterial.setDiffuse(1.0, 0.5, 0.0, 1.0);
+        this.pollenMaterial.setSpecular(1.0, 0.5, 0.0, 1.0);
+        this.pollenMaterial.setShininess(10);
+        this.pollenTexture = new CGFtexture(this.scene, "./images/pollenTexture.jpg");
+        this.pollenMaterial.setTexture(this.pollenTexture);
+        this.pollenMaterial.setTextureWrap('REPEAT', 'REPEAT');    
     }
 
     display(){
@@ -175,10 +184,16 @@ export class MyFlower extends CGFobject{
         if (this.hasPollen)
         {
             this.scene.pushMatrix();
+            this.pollenMaterial.apply();
             this.scene.translate(this.x, this.y + stemLength, this.z + 0.4);
             this.pollen.display()
             this.scene.popMatrix();
         }
+    }
+
+    givePollen(){
+        this.hasPollen = false;
+        return this.pollen;
     }
 
 }

@@ -20,10 +20,10 @@ export class MyBee extends CGFobject{
         this.size = 1;
         this.velocity = [0,0,0];
         this.wingRotation = Math.PI/4;
-
         this.speedIncrement = 0.25;
-
         this.orientationIncrement = Math.PI/12;
+        this.descending = false;
+        this.ascending = false;
 
         this.torso = new MyEllipsoid(scene,0.5,0.5,0.8,12,12);
         this.tail = new MyEllipsoid(scene,0.6,0.6,1,12,12);
@@ -33,8 +33,8 @@ export class MyBee extends CGFobject{
         this.feet = new MyEllipsoid(scene,0.05,0.25,0.05,7,7);
         this.sting = new MyCone(scene,8,8);
         this.wing = new MyEllipse(scene,0.3,0.7,10);
-
-
+        this.pollen = null;
+        this.garden;
         this.initMaterials();
     }
 
@@ -79,22 +79,18 @@ export class MyBee extends CGFobject{
         this.wingMaterial.setDiffuse(1.0, 1.0, 1.0, 0.25);
         this.wingMaterial.setSpecular(1.0, 1.0, 1.0, 0.25);
         this.wingMaterial.setEmission(0,0,0,0);
+
+        this.pollenMaterial = new CGFappearance(this.scene);
+        this.pollenMaterial.setAmbient(1.0, 0.5, 0.0, 1.0);
+        this.pollenMaterial.setDiffuse(1.0, 0.5, 0.0, 1.0);
+        this.pollenMaterial.setSpecular(1.0, 0.5, 0.0, 1.0);
+        this.pollenMaterial.setShininess(10);
+        this.pollenTexture = new CGFtexture(this.scene, "./images/pollenTexture.jpg");
+        this.pollenMaterial.setTexture(this.pollenTexture);
+        this.pollenMaterial.setTextureWrap('REPEAT', 'REPEAT');    
     }
 
     update(time,keysPressed){
-
-
-        //wing and body animations
-        const bodyAmplitude = 0.2;
-        const bodyPeriod = 2000;
-        const wingAmplitude = Math.PI / 4;
-        const wingPeriod = bodyPeriod / 1.5;
-    
-        const bodyDisplacement = bodyAmplitude * Math.sin(2 * Math.PI * time / bodyPeriod);
-        const wingDisplacement = wingAmplitude * Math.sin(2 * Math.PI * time / wingPeriod);
-    
-        this.y += bodyDisplacement;
-        this.wingRotation = wingDisplacement;
 
 
         if(!keysPressed.empty){
@@ -110,9 +106,44 @@ export class MyBee extends CGFobject{
             if(keysPressed.includes('D')){
                 this.turn(-this.orientationIncrement);
             }
+            if(keysPressed.includes('F') && this.pollen == null){
+                this.descending = true;
+                this.velocity[1] = -0.25; //descending velocity
+            }
         }
+    
+        //check to see if descent is done
+        if(this.descending){
+            //always stops as 2
+            if(this.y <=  2){
+                this.getPollen();
+
+            }
+        }
+
+        //check to see if ascent is done
+        else if(this.ascending){
+            if(this.y >= 10){
+                this.ascending = false;
+                this.velocity[1] = 0;
+            }
+        }
+        //normal oscilation animations
+        else{
+            const bodyAmplitude = 0.2;
+            const bodyPeriod = 2000;
+          
         
+            const bodyDisplacement = bodyAmplitude * Math.sin(2 * Math.PI * time / bodyPeriod);
         
+            this.y += bodyDisplacement;
+        }
+
+        //wing animations
+        const wingAmplitude = Math.PI / 4;
+        const wingPeriod = 1500;
+        const wingDisplacement = wingAmplitude * Math.sin(2 * Math.PI * time / wingPeriod);
+        this.wingRotation = wingDisplacement;
 
         //velocity handler
         this.x += this.velocity[0];
@@ -148,11 +179,41 @@ export class MyBee extends CGFobject{
 
     }
 
+    setGarden(garden){
+        this.garden = garden;
+    }
+
+    getPollen(){
+        const roundX = Math.round(this.x);
+        const roundZ = Math.round(this.z);
+        const flower = this.garden.getFlower(roundX,roundZ);
+        if(flower != null){
+            //it got a flower
+            this.pollen = flower.givePollen();
+        }
+
+        console.log(roundZ);
+        this.descending = false;
+        this.ascending = true;
+        this.velocity[1] = 0.25;
+    }
+
     display(){
         this.scene.pushMatrix();
         this.scene.translate(this.x,this.y,this.z);
+
         this.scene.scale(this.size,this.size,this.size);
         this.scene.rotate(this.orientation,0,1,0);
+
+        //pollen
+        if(this.pollen != null){
+            this.scene.pushMatrix();
+            this.pollenMaterial.apply();
+            this.scene.translate(0,-0.5,0);
+            this.pollen.display();
+            this.scene.popMatrix();
+        }
+
         //torso
         this.scene.pushMatrix();
         this.torsoMaterial.apply();
