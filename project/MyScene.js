@@ -5,9 +5,8 @@ import { MyPanorama } from "./objects/MyPanorama.js";
 import { MyRock } from "./objects/MyRock.js";
 import { MyRockSet } from "./objects/MyRockSet.js";
 
-import { MySphere } from "./objects/MySphere.js";
 import { MyGarden } from "./MyGarden.js";
-import { MyFlower } from "./objects/MyFlower.js";
+import { MyBee } from "./objects/MyBee.js";
 
 /**
  * MyScene
@@ -30,7 +29,9 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.DEPTH_TEST);
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
+    this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA)
 
+    this.gl.enable(this.gl.BLEND)
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
@@ -39,7 +40,9 @@ export class MyScene extends CGFscene {
     this.displayAxis = true;
     this.scaleFactor = 1;
 
-    this.flower = new MyFlower(this);
+
+
+    this.bee = new MyBee(this,0,3,0);
 
     this.enableTextures(true);
 
@@ -56,6 +59,8 @@ export class MyScene extends CGFscene {
 
 
     this.garden = new MyGarden(this);
+
+    this.setUpdatePeriod(50); // 60 FPS
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -112,6 +117,9 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
 
+
+    this.bee.display();
+
     // this.garden.display();
 
     this.pushMatrix();
@@ -120,5 +128,10 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
     // ---- END Primitive drawing section
+  }
+  
+  update(time){
+    console.log(time);
+    this.bee.update(time);
   }
 }
