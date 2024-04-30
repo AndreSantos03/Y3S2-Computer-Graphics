@@ -122,16 +122,35 @@ export class MyScene extends CGFscene {
 
     // this.garden.display();
 
-    this.pushMatrix();
-    this.rockAppearance.apply()
-    this.rockset.display();
-    this.popMatrix();
+    // this.pushMatrix();
+    // this.rockAppearance.apply()
+    // this.rockset.display();
+    // this.popMatrix();
 
     // ---- END Primitive drawing section
   }
   
   update(time){
-    console.log(time);
     this.bee.update(time);
+    this.checkKeys();
   }
+
+  checkKeys() {
+    var text = "Keys pressed: ";
+    var keysPressed = false;
+
+    if (this.gui.isKeyPressed("KeyW")) {
+        text += " W ";
+        keysPressed = true;
+    }
+
+    if (this.gui.isKeyPressed("KeyS")) {
+        text += " S ";
+        keysPressed = true;
+    }
+
+    if (keysPressed)
+        console.log(text);
+  }
+
 }
