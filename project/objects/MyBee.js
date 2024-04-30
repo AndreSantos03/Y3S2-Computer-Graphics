@@ -66,10 +66,10 @@ export class MyBee extends CGFobject{
         this.stingMaterial.setShininess(0);
     
         this.wingMaterial = new CGFappearance(this.scene);
-        this.wingMaterial.setAmbient(1.0, 1.0, 1.0, 0.3);
-        this.wingMaterial.setDiffuse(1.0, 1.0, 1.0, 0.3);
-        this.wingMaterial.setSpecular(1.0, 1.0, 1.0, 0.3);
-        this.wingMaterial.setShininess(0);
+        this.wingMaterial.setAmbient(1.0, 1.0, 1.0, 0.25);
+        this.wingMaterial.setDiffuse(1.0, 1.0, 1.0, 0.25);
+        this.wingMaterial.setSpecular(1.0, 1.0, 1.0, 0.25);
+        this.wingMaterial.setEmission(0,0,0,0);
     }
     
 
@@ -193,6 +193,7 @@ export class MyBee extends CGFobject{
         this.scene.translate(0,4.5,1.5);
         this.sting.display();
         this.scene.popMatrix();
+
 
         //wings
         this.scene.pushMatrix();
