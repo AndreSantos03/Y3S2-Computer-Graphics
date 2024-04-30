@@ -2,6 +2,7 @@ import {CGFappearance, CGFobject, CGFtexture} from "../../lib/CGF.js";
 import { MySphere } from "./MySphere.js";
 import { MyTriangle } from "./MyTriangle.js";
 import { MyCylinder } from "./MyCylinder.js";
+import { MyPollen } from "./MyPollen.js";
 
 export class MyFlower extends CGFobject{
     constructor(scene,x,y,z){
@@ -11,9 +12,12 @@ export class MyFlower extends CGFobject{
         this.y = y;
         this.z = z;
 
+        this.pollen = new  MyPollen(scene, 0.2, 6, 3, false, 1, 1.4)
+        this.hasPollen = true;
+
         this.flowerRadius = getRandomNumber(0.4,1,0.001);
         this.numberFlorets = getRandomNumber(5,12,1);
-        this.diskRadius = getRandomNumber(0.2,0.8,0.001);
+        this.diskRadius = 0.3;
         this.stemRadius = getRandomNumber(0.4,0.8,0.001);;
         this.stemSize = getRandomNumber(2,4,1);
         this.floretsColor = getRandomRGBColor();
@@ -164,6 +168,15 @@ export class MyFlower extends CGFobject{
             this.scene.translate(-1, -1, 0); // Translate the petal onto the side of the of disk
             this.floretMaterial.apply();
             secondTriangle.display();
+            this.scene.popMatrix();
+        }
+
+        // Pollen
+        if (this.hasPollen)
+        {
+            this.scene.pushMatrix();
+            this.scene.translate(this.x, this.y + stemLength, this.z + 0.4);
+            this.pollen.display()
             this.scene.popMatrix();
         }
     }
