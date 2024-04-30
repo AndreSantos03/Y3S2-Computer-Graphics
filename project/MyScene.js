@@ -41,8 +41,9 @@ export class MyScene extends CGFscene {
     this.scaleFactor = 1;
 
 
+    this.pressedKeys = [];
 
-    this.bee = new MyBee(this,0,3,0);
+    this.bee = new MyBee(this,0,6,0,0);
 
     this.enableTextures(true);
 
@@ -131,26 +132,30 @@ export class MyScene extends CGFscene {
   }
   
   update(time){
-    this.bee.update(time);
     this.checkKeys();
+    this.bee.update(time,this.pressedKeys);
   }
 
   checkKeys() {
-    var text = "Keys pressed: ";
-    var keysPressed = false;
+    this.pressedKeys =[];
 
     if (this.gui.isKeyPressed("KeyW")) {
-        text += " W ";
-        keysPressed = true;
+      this.pressedKeys.push("W");
     }
 
     if (this.gui.isKeyPressed("KeyS")) {
-        text += " S ";
-        keysPressed = true;
+      this.pressedKeys.push("S");
+
     }
 
-    if (keysPressed)
-        console.log(text);
+    if (this.gui.isKeyPressed("KeyD")) {
+      this.pressedKeys.push("D");
+
+    }
+    if (this.gui.isKeyPressed("KeyA")) {
+      this.pressedKeys.push("A");
+
+    }
   }
 
 }
