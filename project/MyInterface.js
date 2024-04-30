@@ -4,6 +4,7 @@ import {CGFinterface, dat} from '../lib/CGF.js';
 * MyInterface
 * @constructor
 */
+
 export class MyInterface extends CGFinterface {
     constructor() {
         super();
@@ -22,7 +23,16 @@ export class MyInterface extends CGFinterface {
 
         //Slider element in GUI
         this.gui.add(this.scene, 'scaleFactor', 0.1, 5).name('Scale Factor');
-
+        const beeSpeedController = this.gui.add(this.scene, 'beeSpeed', 0.1, 3).name('Bee Speed');
+        beeSpeedController.onChange((value) => {
+            // Call the updateBeeSpeed method of the scene to update the bee's speed
+            this.scene.updateBeeSpeed(value);
+        });
+        const beeSizeController = this.gui.add(this.scene, 'beeSize', 0.5, 3).name('Bee Size');
+        beeSizeController.onChange((value) => {
+            // Call the updateBeeSpeed method of the scene to update the bee's speed
+            this.scene.updateBeeSize(value);
+        });
         this.initKeys();
 
         return true;

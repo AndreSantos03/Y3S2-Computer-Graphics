@@ -13,12 +13,15 @@ export class MyBee extends CGFobject{
         this.y = y;
         this.z = z;
 
+
+
         this.orientation = orientation;
         this.speed = 0;
+        this.size = 1;
         this.velocity = [0,0,0];
         this.wingRotation = Math.PI/4;
 
-        this.speedIncrement = 0.1;
+        this.speedIncrement = 0.25;
 
         this.orientationIncrement = Math.PI/12;
 
@@ -136,10 +139,19 @@ export class MyBee extends CGFobject{
         }
        
     }
+    setSpeed(speed) {
+        this.speedIncrement = speed;
+       
+    }
+    setSize(size) {
+        this.size = size;
+
+    }
 
     display(){
         this.scene.pushMatrix();
         this.scene.translate(this.x,this.y,this.z);
+        this.scene.scale(this.size,this.size,this.size);
         this.scene.rotate(this.orientation,0,1,0);
         //torso
         this.scene.pushMatrix();

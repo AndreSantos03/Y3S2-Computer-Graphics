@@ -39,12 +39,14 @@ export class MyScene extends CGFscene {
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
-
+    this.beeSpeed = 0.25;
+    this.beeSize = 1;
 
     this.pressedKeys = [];
 
     this.bee = new MyBee(this,0,6,0,0);
-
+  
+    
     this.enableTextures(true);
 
     this.terrainTexture = new CGFtexture(this, "images/terrain.jpg");
@@ -83,6 +85,12 @@ export class MyScene extends CGFscene {
     this.setDiffuse(0.2, 0.4, 0.8, 1.0);
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
+  }
+  updateBeeSpeed(speed) {
+    this.bee.setSpeed(speed);
+  }
+  updateBeeSize(size){
+    this.bee.setSize(size);
   }
   display() {
     // ---- BEGIN Background, camera and axis setup
