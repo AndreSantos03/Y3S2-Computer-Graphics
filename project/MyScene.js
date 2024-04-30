@@ -39,11 +39,14 @@ export class MyScene extends CGFscene {
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.scaleFactor = 1;
+    this.beeSpeed = 0.25;
+    this.beeSize = 1;
 
+    this.pressedKeys = [];
 
-
-    this.bee = new MyBee(this,0,3,0);
-
+    this.bee = new MyBee(this,0,6,0,0);
+  
+    
     this.enableTextures(true);
 
     this.terrainTexture = new CGFtexture(this, "images/terrain.jpg");
@@ -82,6 +85,12 @@ export class MyScene extends CGFscene {
     this.setDiffuse(0.2, 0.4, 0.8, 1.0);
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
+  }
+  updateBeeSpeed(speed) {
+    this.bee.setSpeed(speed);
+  }
+  updateBeeSize(size){
+    this.bee.setSize(size);
   }
   display() {
     // ---- BEGIN Background, camera and axis setup
@@ -122,16 +131,39 @@ export class MyScene extends CGFscene {
 
     // this.garden.display();
 
-    this.pushMatrix();
-    this.rockAppearance.apply()
-    this.rockset.display();
-    this.popMatrix();
+    // this.pushMatrix();
+    // this.rockAppearance.apply()
+    // this.rockset.display();
+    // this.popMatrix();
 
     // ---- END Primitive drawing section
   }
   
   update(time){
-    console.log(time);
-    this.bee.update(time);
+    this.checkKeys();
+    this.bee.update(time,this.pressedKeys);
   }
+
+  checkKeys() {
+    this.pressedKeys =[];
+
+    if (this.gui.isKeyPressed("KeyW")) {
+      this.pressedKeys.push("W");
+    }
+
+    if (this.gui.isKeyPressed("KeyS")) {
+      this.pressedKeys.push("S");
+
+    }
+
+    if (this.gui.isKeyPressed("KeyD")) {
+      this.pressedKeys.push("D");
+
+    }
+    if (this.gui.isKeyPressed("KeyA")) {
+      this.pressedKeys.push("A");
+
+    }
+  }
+
 }
