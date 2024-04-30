@@ -22,10 +22,7 @@ export class MyBee extends CGFobject{
         this.sting = new MyCone(scene,8,8);
         this.wing = new MyEllipse(scene,0.3,0.7,10);
 
-        // this.scene.gl.enable(this.scene.gl.BLEND);
-        // this.scene.gl.blendFunc(this.scene.gl.SRC_ALPHA, this.scene.gl.ONE_MINUS_SRC_ALPHA);
-        
-
+        this.wingRotation = Math.PI/4;
         this.initMaterials();
     }
 
@@ -71,6 +68,20 @@ export class MyBee extends CGFobject{
         this.wingMaterial.setSpecular(1.0, 1.0, 1.0, 0.25);
         this.wingMaterial.setEmission(0,0,0,0);
     }
+
+    update(time){
+        const bodyAmplitude = 0.2;
+        const bodyPeriod = 2000;
+        const wingAmplitude = Math.PI / 4;
+        const wingPeriod = bodyPeriod / 1.5;
+    
+        const bodyDisplacement = bodyAmplitude * Math.sin(2 * Math.PI * time / bodyPeriod);
+        const wingDisplacement = wingAmplitude * Math.sin(2 * Math.PI * time / wingPeriod);
+    
+        this.y = bodyDisplacement;
+        this.wingRotation = wingDisplacement;
+    }
+    
     
 
     display(){
@@ -145,7 +156,7 @@ export class MyBee extends CGFobject{
 
         //feet , uses the same texture as the antennas
         this.scene.pushMatrix();
-        this.scene.translate(this.x,this.y,this.y);
+        this.scene.translate(this.x,this.y,this.z);
         this.scene.rotate(Math.PI/6,0,0,1);
         this.scene.translate(0.25,-0.5,0);
         this.antennaMaterial.apply();
@@ -157,7 +168,7 @@ export class MyBee extends CGFobject{
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(this.x,this.y,this.y);
+        this.scene.translate(this.x,this.y,this.z);
         this.scene.rotate(-Math.PI/6,0,0,1);
         this.scene.translate(-0.25,-0.5,0);
         this.antennaMaterial.apply();
@@ -170,7 +181,7 @@ export class MyBee extends CGFobject{
 
         this.scene.pushMatrix();
         this.antennaMaterial.apply();
-        this.scene.translate(this.x,this.y,this.y);
+        this.scene.translate(this.x,this.y,this.z);
         this.scene.translate(0.55,-0.6,0);
         this.feet.display();
         this.scene.translate(-1.1,0,0);
@@ -187,7 +198,7 @@ export class MyBee extends CGFobject{
 
         //sting
         this.scene.pushMatrix();
-        this.scene.translate(this.x,this.y,this.y);
+        this.scene.translate(this.x,this.y,this.z);
         this.scene.rotate(-Math.PI*5/8,1,0,0);
         this.scene.scale(0.1,0.5,0.1);
         this.scene.translate(0,4.5,1.5);
@@ -201,19 +212,30 @@ export class MyBee extends CGFobject{
         this.scene.translate(this.x,this.y,this.z);
         this.scene.rotate(-Math.PI/2,1,0,0);
         this.scene.rotate(-Math.PI/2,0,0,1);
+        this.scene.rotate(this.wingRotation, 1, 0,0);
         this.scene.translate(0,0,0.2);
         this.scene.translate(0.35,1,0);
         this.wing.display();
-        this.scene.translate(0,-2,0);
+        this.scene.translate(-0.6,0,0);
+        this.wing.display();
+        this.scene.popMatrix();
+        
+        this.scene.pushMatrix();
+        this.wingMaterial.apply();
+        this.scene.translate(this.x,this.y,this.z);
+        this.scene.rotate(-Math.PI/2,1,0,0);
+        this.scene.rotate(-Math.PI/2,0,0,1);
+        this.scene.rotate(-this.wingRotation, 1, 0,0);
+
+        this.scene.translate(0,0,0.2);
+        this.scene.translate(0.35,-1,0);
         this.wing.display();
         this.scene.translate(-0.6,0,0);
         this.wing.display();
-        this.scene.translate(0,2,0);
-        this.wing.display();
         this.scene.popMatrix();
 
-
     }
+
 }
 
 

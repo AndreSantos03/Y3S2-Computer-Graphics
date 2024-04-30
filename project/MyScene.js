@@ -41,7 +41,8 @@ export class MyScene extends CGFscene {
     this.scaleFactor = 1;
 
 
-    this.bee = new MyBee(this,0,0,0);
+
+    this.bee = new MyBee(this,0,3,0);
 
     this.enableTextures(true);
 
@@ -58,6 +59,8 @@ export class MyScene extends CGFscene {
 
 
     this.garden = new MyGarden(this);
+
+    this.setUpdatePeriod(50); // 60 FPS
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -125,5 +128,10 @@ export class MyScene extends CGFscene {
     // this.popMatrix();
 
     // ---- END Primitive drawing section
+  }
+  
+  update(time){
+    console.log(time);
+    this.bee.update(time);
   }
 }
