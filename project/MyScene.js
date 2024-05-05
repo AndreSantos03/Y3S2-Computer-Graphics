@@ -7,6 +7,7 @@ import { MyRockSet } from "./objects/MyRockSet.js";
 
 import { MyGarden } from "./MyGarden.js";
 import { MyBee } from "./objects/MyBee.js";
+import { MyHive } from "./objects/MyHive.js";
 
 /**
  * MyScene
@@ -60,6 +61,7 @@ export class MyScene extends CGFscene {
     this.rockset = new MyRockSet(this)
     this.rockAppearance = new CGFappearance(this);
 
+    this.hive = new MyHive(this,0,0,0);
 
     this.garden = new MyGarden(this);
     this.bee.setGarden(this.garden);
@@ -127,9 +129,11 @@ export class MyScene extends CGFscene {
 
 
 
-    this.bee.display();
+    // this.bee.display();
 
-    this.garden.display();
+    // this.garden.display();
+
+    this.hive.display();
 
     // this.pushMatrix();
     // this.rockAppearance.apply()
