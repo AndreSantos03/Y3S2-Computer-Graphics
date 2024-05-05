@@ -24,6 +24,7 @@ export class MyBee extends CGFobject{
         this.orientationIncrement = Math.PI/12;
         this.descending = false;
         this.ascending = false;
+        this.atBottom = false;
 
         this.torso = new MyEllipsoid(scene,0.5,0.5,0.8,12,12);
         this.tail = new MyEllipsoid(scene,0.6,0.6,1,12,12);
@@ -106,21 +107,27 @@ export class MyBee extends CGFobject{
             if(keysPressed.includes('D')){
                 this.turn(-this.orientationIncrement);
             }
-            if(keysPressed.includes('F') && this.pollen == null){
+            if(keysPressed.includes('F') && this.pollen == null && !this.atBottom){
                 this.descending = true;
                 this.velocity[1] = -0.25; //descending velocity
+            }
+            if(keysPressed.includes('P') && this.atBottom){
+                this.tryGetPollen();
+                this.ascending = true;
+                this.velocity[1] = 0.25; // set velocity up
+                this.atBottom = false;
             }
         }
     
         //check to see if descent is done
         if(this.descending){
-            //always stops as 2
-            if(this.y <=  2){
-                this.getPollen();
-
+            if(this.y <=  4){
+                this.atBottom = true;
+                this.descending = false;
+                //reset velocity
+                this.velocity[1] = 0;
             }
         }
-
         //check to see if ascent is done
         else if(this.ascending){
             if(this.y >= 10){
@@ -130,14 +137,24 @@ export class MyBee extends CGFobject{
         }
         //normal oscilation animations
         else{
-            const bodyAmplitude = 0.2;
-            const bodyPeriod = 2000;
+            let bodyAmplitude, bodyPeriod;
+
+            //animation at bottom is lower
+            if (this.atBottom) {
+                bodyAmplitude = 0.05; 
+                bodyPeriod = 4000;  
+            }
+             else {
+                bodyAmplitude = 0.2;
+                bodyPeriod = 2000;
+            }
           
         
             const bodyDisplacement = bodyAmplitude * Math.sin(2 * Math.PI * time / bodyPeriod);
         
             this.y += bodyDisplacement;
         }
+
 
         //wing animations
         const wingAmplitude = Math.PI / 4;
@@ -183,20 +200,31 @@ export class MyBee extends CGFobject{
         this.garden = garden;
     }
 
-    getPollen(){
-        const roundX = Math.round(this.x);
-        const roundZ = Math.round(this.z);
-        const flower = this.garden.getFlower(roundX,roundZ);
-        if(flower != null){
-            //it got a flower
-            this.pollen = flower.givePollen();
+    tryGetPollen() {
+        let flowerSpacing = this.garden.getFlowerSpacing();
+        const threshold = 1.5; // Threshold value
+    
+        // Calculate the nearest flower positions along the x and z axes
+        let nearestFlowerX = Math.round(this.x / flowerSpacing) * flowerSpacing;
+        let nearestFlowerZ = Math.round(this.z / flowerSpacing) * flowerSpacing;
+    
+        // Calculate the distance between the current position and the nearest flower positions
+        let distanceX = Math.abs(this.x - nearestFlowerX);
+        let distanceZ = Math.abs(this.z - nearestFlowerZ);
+    
+        // Check if the distances are within the threshold
+        if (distanceX <= threshold && distanceZ <= threshold) {
+            const flowerX = Math.round(this.x / flowerSpacing);
+            const flowerZ = Math.round(this.z / flowerSpacing);
+    
+            const flower = this.garden.getFlower(flowerX, flowerZ);
+            if (flower != null) {
+                // It got a flower
+                this.pollen = flower.givePollen();
+            }
         }
-
-        console.log(roundZ);
-        this.descending = false;
-        this.ascending = true;
-        this.velocity[1] = 0.25;
     }
+    
 
     display(){
         this.scene.pushMatrix();

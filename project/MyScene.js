@@ -167,6 +167,9 @@ export class MyScene extends CGFscene {
     if(this.gui.isKeyPressed("KeyF")){
       this.pressedKeys.push("F");
     }
+    if(this.gui.isKeyPressed("KeyP")){
+      this.pressedKeys.push("P");
+    }
   }
 
 }

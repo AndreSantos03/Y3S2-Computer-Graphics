@@ -8,6 +8,7 @@ export class MyGarden extends CGFscene {
         this.numRows = numberFlowersRow;
         this.numCols = numberFlowersCol; 
         this.flowers = [];
+        this.flowerSpacing = 4;
         this.init();
     }
 
@@ -15,14 +16,23 @@ export class MyGarden extends CGFscene {
         // Create flowers and position them in the garden
         for (let i = 0; i < this.numRows; i++) {
             for (let j = 0; j < this.numCols; j++) {
-                let x = j * 4; 
-                let z = i * 4;
+                let x = j * this.flowerSpacing; 
+                let z = i * this.flowerSpacing;
                 let flower = new MyFlower(this.scene, x,0,z);
                 this.flowers.push(flower);
             }
         }
     }
 
+    getNumRows(){
+        return this.numRows;
+    }
+    getNumCols(){
+        return this.numCols;
+    }
+    getFlowerSpacing(){
+        return this.flowerSpacing;
+    }
 
     getFlower(x,z){
         //checks to see if position has flower
