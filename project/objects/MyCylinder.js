@@ -25,9 +25,8 @@ export class MyCylinder extends CGFobject {
 
 		for (var j = 0; j < this.stacks; j++)
 		{
-			for (var i = 0; i < this.slices; i++)
+			for (var i = 0; i <= this.slices; i++)
 			{
-
 				this.vertices.push(Math.cos(angle * i))
 				this.vertices.push(Math.sin(angle * i))
 				this.vertices.push((j+1) / this.stacks)
@@ -35,24 +34,24 @@ export class MyCylinder extends CGFobject {
 				this.vertices.push(Math.cos(angle * i))
 				this.vertices.push(Math.sin(angle * i))
 				this.vertices.push(j / this.stacks)
-
-				this.indices.push(j*this.slices*2 + i*2)
-				this.indices.push(j*this.slices*2 + i*2+1)
-				this.indices.push(j*this.slices*2 + i*2+2)
-
-				this.indices.push(j*this.slices*2 + i*2+1)
-				this.indices.push(j*this.slices*2 + i*2+3)
-				this.indices.push(j*this.slices*2 + i*2+2)
+						
+				if (i < this.slices - 1 || j != this.stacks -1 )
+				{
+					this.indices.push(j*this.slices*2 + i*2)
+					this.indices.push(j*this.slices*2 + i*2+1)
+					this.indices.push(j*this.slices*2 + i*2+2)
+	
+					this.indices.push(j*this.slices*2 + i*2+1)
+					this.indices.push(j*this.slices*2 + i*2+3)
+					this.indices.push(j*this.slices*2 + i*2+2)
+				}
 
 				this.normals.push(Math.cos(angle * i), Math.sin(angle * i),0);
 				this.normals.push(Math.cos(angle * i), Math.sin(angle * i),0);
+
 				this.texCoords.push(i / this.slices, (j + 1) / this.stacks); 
                 this.texCoords.push(i / this.slices, j / this.stacks);
 			}
-
-			this.indices[this.indices.length-1] = j*this.slices*2
-			this.indices[this.indices.length-2] = j*this.slices*2 + 1
-			this.indices[this.indices.length-4] = j*this.slices*2
 		}
 
 		//The defined indices (and corresponding vertices)
