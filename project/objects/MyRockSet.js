@@ -3,8 +3,11 @@ import { MyRock } from './MyRock.js';
 
 export class MyRockSet extends CGFobject {
 
-    constructor(scene) {
+    constructor(scene,x,y,z) {
         super(scene)
+        this.x = x;
+        this.y = y;
+        this.z = z;
         this.rock1 = new MyRock(scene, 1, 6, 6)
         this.rock2 = new MyRock(scene, 1, 6, 6)
         this.rock3 = new MyRock(scene, 1, 6, 6)
@@ -17,6 +20,9 @@ export class MyRockSet extends CGFobject {
     }
 
     display() {
+        this.scene.pushMatrix()
+        this.scene.translate(this.x,this.y + 0.5,this.z)
+
         this.scene.pushMatrix()
         this.scene.translate(2, 0, 0)
         this.scene.scale(this.r1, this.r2, this.r3)
@@ -50,6 +56,7 @@ export class MyRockSet extends CGFobject {
         this.scene.scale(this.r1, this.r3, this.r2)
         this.scene.rotate(this.r3, this.r3, this.r2, 1)
         this.rock4.display()
+        this.scene.popMatrix()
         this.scene.popMatrix()
     }
 }

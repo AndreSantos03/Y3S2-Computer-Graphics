@@ -57,11 +57,6 @@ export class MyScene extends CGFscene {
 
     this.skysphere = new MySkySphere(this, new CGFtexture(this, "images/earth.jpg"))
     this.panorama = new MyPanorama(this, new CGFtexture(this, "images/panorama4.jpg"))
-    this.rock1 = new MyRock(this, 1, 6, 3)
-    this.rockset = new MyRockSet(this)
-    this.rockAppearance = new CGFappearance(this);
-
-    this.hive = new MyHive(this,0,0,0);
 
     this.garden = new MyGarden(this);
     this.bee.setGarden(this.garden);
@@ -129,16 +124,11 @@ export class MyScene extends CGFscene {
 
 
 
-    // this.bee.display();
+    this.bee.display();
 
-    // this.garden.display();
+    this.garden.display();
 
-    this.hive.display();
 
-    // this.pushMatrix();
-    // this.rockAppearance.apply()
-    // this.rockset.display();
-    // this.popMatrix();
 
     // ---- END Primitive drawing section
   }
@@ -173,6 +163,9 @@ export class MyScene extends CGFscene {
     }
     if(this.gui.isKeyPressed("KeyP")){
       this.pressedKeys.push("P");
+    }
+    if(this.gui.isKeyPressed("KeyO")){
+      this.pressedKeys.push("O");
     }
   }
 

@@ -117,6 +117,10 @@ export class MyBee extends CGFobject{
                 this.velocity[1] = 0.25; // set velocity up
                 this.atBottom = false;
             }
+            if(keysPressed.includes('O') && this.pollen != null){
+                this.garden.getHive().addPollen(this.pollen);
+                this.pollen = null;
+            }
         }
     
         //check to see if descent is done
