@@ -25,6 +25,7 @@ export class MyBee extends CGFobject{
         this.descending = false;
         this.ascending = false;
         this.atBottom = false;
+        this.tripHive = false;
 
         this.torso = new MyEllipsoid(scene,0.5,0.5,0.8,12,12);
         this.tail = new MyEllipsoid(scene,0.6,0.6,1,12,12);
@@ -93,13 +94,13 @@ export class MyBee extends CGFobject{
 
     update(time,keysPressed){
 
-
-        if(!keysPressed.empty){
+        if(!keysPressed.empty && !this.tripHive){ //disable commands on the trip hive
+            
             if(keysPressed.includes('W')){
-                this.accelerate(this.speedIncrement); // Use 'this' to refer to the object's method
+                this.accelerate(this.speedIncrement); 
             }
             if(keysPressed.includes('S')){
-                this.accelerate(-this.speedIncrement); // Use 'this' to refer to the object's method
+                this.accelerate(-this.speedIncrement);
             }
             if(keysPressed.includes('A')){
                 this.turn(this.orientationIncrement);
@@ -118,8 +119,16 @@ export class MyBee extends CGFobject{
                 this.atBottom = false;
             }
             if(keysPressed.includes('O') && this.pollen != null){
-                this.garden.getHive().addPollen(this.pollen);
-                this.pollen = null;
+                this.tripHive = true;
+                
+                // Calculate the offset from the hive position
+                var x_offset = -10 - this.x; // hive position is -10
+                var z_offset = -10 - this.z; // hive position is -10
+
+                var angle = Math.atan2(z_offset, x_offset);
+                this.accelerate(this.speedIncrement);            
+                this.turn(angle);
+                console.log(this.velocity)
             }
         }
     
@@ -137,6 +146,14 @@ export class MyBee extends CGFobject{
             if(this.y >= 10){
                 this.ascending = false;
                 this.velocity[1] = 0;
+            }
+        }
+        else if(this.tripHive){
+            if(this.x <= -10  && this.z <= -10){
+                this.garden.getHive().addPollen(this.pollen);
+                this.pollen = null;
+                this.tripHive = false;
+                this.velocity = [0,0,0]; //reset speed
             }
         }
         //normal oscilation animations
