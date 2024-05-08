@@ -10,8 +10,6 @@ export class MyEllipsoid extends CGFobject {
         this.slices = slices;
         this.stacks = stacks;
         this.initBuffers();
-
-        console.log("dajwdjawdw-ajda\n");
     }
 
     initBuffers() {

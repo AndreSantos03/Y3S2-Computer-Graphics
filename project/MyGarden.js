@@ -10,7 +10,7 @@ export class MyGarden extends CGFscene {
         this.numRows = numberFlowersRow;
         this.numCols = numberFlowersCol; 
         this.flowers = [];
-        this.flowerSpacing = 4;
+        this.flowerSpacing = 5;
 
         this.rockset = new MyRockSet(scene,-10,0,-10);
         this.hive = new MyHive(scene,-10,0,-10);

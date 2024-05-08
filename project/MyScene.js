@@ -25,7 +25,6 @@ export class MyScene extends CGFscene {
 
     //Background color
     this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
-
     this.gl.clearDepth(100.0);
     this.gl.enable(this.gl.DEPTH_TEST);
     this.gl.enable(this.gl.CULL_FACE);
@@ -38,7 +37,7 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
 
     //Objects connected to MyInterface
-    this.displayAxis = true;
+    this.displayAxis = false;
     this.scaleFactor = 1;
     this.beeSpeed = 0.25;
     this.beeSize = 1;
@@ -50,7 +49,7 @@ export class MyScene extends CGFscene {
     
     this.enableTextures(true);
 
-    this.terrainTexture = new CGFtexture(this, "images/terrain.jpg");
+    this.terrainTexture = new CGFtexture(this, "images/newTerrainTexture.jpg");
     this.terrainAppearance = new CGFappearance(this);
     this.terrainAppearance.setTexture(this.terrainTexture);
     this.terrainAppearance.setTextureWrap('REPEAT', 'REPEAT');
@@ -108,15 +107,11 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     this.terrainAppearance.apply();
-    this.translate(0,-100,0);
     this.scale(400,400,400);
     this.rotate(-Math.PI/2.0,1,0,0);
     this.plane.display();
     this.popMatrix();
 
-    //this.pushMatrix();
-    //this.skysphere.display();
-    //this.popMatrix();
 
     this.pushMatrix();
     this.panorama.display();
@@ -129,6 +124,8 @@ export class MyScene extends CGFscene {
     this.garden.display();
 
 
+    //NOT USED IN THE FINAL PROJECT
+    // this.skysphere.display();  
 
     // ---- END Primitive drawing section
   }
