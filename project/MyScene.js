@@ -113,9 +113,7 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
 
-    this.pushMatrix();
     this.panorama.display();
-    this.popMatrix();
 
 
 
