@@ -59,8 +59,7 @@ export class MyPrism extends CGFobject {
 			}
 		}
 
-		console.log(this.indices)
-		console.log(this.vertices)
+
 
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles

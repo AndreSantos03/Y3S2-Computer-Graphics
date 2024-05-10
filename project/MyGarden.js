@@ -43,10 +43,8 @@ export class MyGarden extends CGFscene {
         // Create grass and position them in the garden of 50x50
         for (let i = 0; i <= 50; i += this.grassSpacing) {
             for (let j = 0; j <= 50; j += this.grassSpacing) {
-                console.log()
                 //check to see if its not in a flower occupied position
                 if( (i % 10 != 0) && (j % 10 != 0)){
-                    console.log(i + " " + j )
                     let grassLeaf = new MyGrassLeaf(this.scene, i,0,j);
                     this.grass.push(grassLeaf);
                 }

@@ -128,7 +128,6 @@ export class MyBee extends CGFobject{
                 var angle = Math.atan2(z_offset, x_offset);
                 this.accelerate(this.speedIncrement);            
                 this.turn(angle);
-                console.log(this.velocity)
             }
         }
     
