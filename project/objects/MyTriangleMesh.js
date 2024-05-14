@@ -23,18 +23,18 @@ export class MyTriangleMesh extends CGFobject {
         ];
 
         this.texCoords = [
-            0, 0,   // Vertex 0
-            2, 0,   // Vertex 1
-            0, 3,   // Vertex 2
-            2, 3,   // Vertex 3
-            4, 0,   // Vertex 4
-            4, 3,   // Vertex 5
-            0, 6,   // Vertex 6
-            2, 6,   // Vertex 7
-            4, 6,   // Vertex 8
-            2, 9,   // Vertex 9
-            -0.5, 0, // Vertex 10
-            2.5, 0, // Vertex 11
+            1/6, 1,   // Vertex 0
+            1/2, 1,   // Vertex 1
+            1/6, 2/3,   // Vertex 2
+            1/2, 2/3,   // Vertex 3
+            5/6, 1,   // Vertex 4
+            5/6, 2/3,   // Vertex 5
+            1/6, 1/3,   // Vertex 6
+            0.5, 1/3,   // Vertex 7
+            5/6, 1/3,   // Vertex 8
+            0.5, 0,   // Vertex 9
+            0, 1, // Vertex 10
+            1, 1, // Vertex 11
         ];
 
         this.indices = [

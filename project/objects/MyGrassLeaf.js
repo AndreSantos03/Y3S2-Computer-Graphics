@@ -38,7 +38,6 @@ export class MyGrassLeaf extends CGFobject {
 
 
     display() {
-        const gl = this.scene.gl;
         this.scene.pushMatrix();        
         this.scene.translate(this.x, this.y, this.z);
         this.scene.scale(this.width,this.height,1)
