@@ -70,16 +70,16 @@ export class MyGarden extends CGFscene {
         }
     }
 
-    // update(time) {
-    //     const windIntensity = 1.0; // Example wind intensity
-    //     const windAngle = 0.0; // Example wind angle in radians
+    update(time) {
+        const intensity = 7.0; // Example wind intensity
+        const angle = Math.PI; // Example wind angle in radians
 
-    //     this.grassShader.setUniformsValues({
-    //         uTime: time,
-    //         uWindIntensity: windIntensity,
-    //         uWindAngle: windAngle,
-    //     });
-    // }
+        this.grassShader.setUniformsValues({
+            timeFactor: time,
+            windIntensity: intensity,
+            windAngle: angle,
+        });
+    }
 
     display() {
         // Display flowers

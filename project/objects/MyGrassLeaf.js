@@ -14,7 +14,7 @@ export class MyGrassLeaf extends CGFobject {
         this.width = minWidth + Math.random() * (maxWidth - minWidth);
 
         let minHeight = 0.2;
-        let maxHeight = 1;
+        let maxHeight = 0.8;
         this.height = minHeight + Math.random() * (maxHeight - minHeight);
 
         this.triangle = new MyTriangleMesh(scene, 3);
