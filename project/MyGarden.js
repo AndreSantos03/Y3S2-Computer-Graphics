@@ -88,9 +88,10 @@ export class MyGarden extends CGFscene {
     }
 
     getFlower(x,z){
-        //checks to see if position has flower
-        if( x >= 0 && x <= this.numRows && z >= 0 && z <= this.numCols){
-            return this.flowers[this.numRows * z + x];
+        let flowerOffset = Math.floor(this.width / this.flowerSpacing) * z + x; 
+
+        if(flowerOffset < this.flowers.length){
+            return this.flowers[flowerOffset];
         }
         return null;
     }

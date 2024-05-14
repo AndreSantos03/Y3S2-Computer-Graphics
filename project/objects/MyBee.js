@@ -236,7 +236,7 @@ export class MyBee extends CGFobject{
             const flowerX = Math.round(this.x / flowerSpacing);
             const flowerZ = Math.round(this.z / flowerSpacing);
     
-            const flower = this.garden.getFlower(flowerX, flowerZ);
+            let flower = this.garden.getFlower(flowerX, flowerZ);
             if (flower != null) {
                 // It got a flower
                 this.pollen = flower.givePollen();
