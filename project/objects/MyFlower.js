@@ -5,12 +5,18 @@ import { MyCylinder } from "./MyCylinder.js";
 import { MyPollen } from "./MyPollen.js";
 
 export class MyFlower extends CGFobject{
-    constructor(scene,x,y,z){
+    constructor(scene,x,y,z,stemTexture,diskTexture,floretTexture,leafTexture,pollenTexture){
         super(scene);
 
         this.x = x;
         this.y = y;
         this.z = z;
+
+        this.stemTexture = stemTexture;
+        this.diskTexture = diskTexture;
+        this.floretTexture = floretTexture;
+        this.leafTexture = leafTexture;
+        this.pollenTexture = pollenTexture;
 
         this.pollen = new  MyPollen(scene, 0.2, 6, 3, false, 1, 1.4)
         this.hasPollen = true;
@@ -57,7 +63,6 @@ export class MyFlower extends CGFobject{
         this.stemMaterial.setDiffuse(this.stemColor[0], this.stemColor[1], this.stemColor[2],1);
         this.stemMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.stemMaterial.setShininess(10);
-        this.stemTexture = new CGFtexture(this.scene, "./images/stemTexture.jpg");
         this.stemMaterial.setTexture(this.stemTexture);
         this.stemMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
@@ -68,7 +73,6 @@ export class MyFlower extends CGFobject{
         this.diskMaterial.setDiffuse(this.diskColor[0], this.diskColor[1], this.diskColor[2]);
         this.diskMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.diskMaterial.setShininess(10);
-        this.diskTexture = new CGFtexture(this.scene, "./images/diskTexture.jpg");
         this.diskMaterial.setTexture(this.diskTexture);
         this.diskMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
@@ -78,7 +82,6 @@ export class MyFlower extends CGFobject{
         this.floretMaterial.setDiffuse(this.floretsColor[0], this.floretsColor[1], this.floretsColor[2]);
         this.floretMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.floretMaterial.setShininess(10);
-        this.floretTexture = new CGFtexture(this.scene, "./images/petalTexture.jpg");
         this.floretMaterial.setTexture(this.floretTexture);
         this.floretMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
@@ -88,7 +91,6 @@ export class MyFlower extends CGFobject{
         this.leafMaterial.setDiffuse(this.leavesColor[0], this.leavesColor[1], this.leavesColor[2]);
         this.leafMaterial.setSpecular(0.1, 0.1, 0.1, 1);
         this.leafMaterial.setShininess(10);
-        this.leafTexture = new CGFtexture(this.scene, "./images/leafTexture.jpg");
         this.leafMaterial.setTexture(this.leafTexture);
         this.leafMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
@@ -98,7 +100,6 @@ export class MyFlower extends CGFobject{
         this.pollenMaterial.setDiffuse(1.0, 0.5, 0.0, 1.0);
         this.pollenMaterial.setSpecular(1.0, 0.5, 0.0, 1.0);
         this.pollenMaterial.setShininess(10);
-        this.pollenTexture = new CGFtexture(this.scene, "./images/pollenTexture.jpg");
         this.pollenMaterial.setTexture(this.pollenTexture);
         this.pollenMaterial.setTextureWrap('REPEAT', 'REPEAT');    
     }

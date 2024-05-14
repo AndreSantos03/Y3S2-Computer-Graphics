@@ -32,10 +32,32 @@ export class MyGarden extends CGFscene {
         this.rockAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
 
+    
+        //we're loading here the textures and shaders so that we don't have to load them throughout the whole project
+
+
+        //grassAppearance
+        this.grassTexture = new CGFtexture(this.scene, './images/grassTexture.jpg');
+        // m.grassShader = new CGFshader(this.scene.gl, "./shaders/grass.vert", "./shaders/grass.frag");
+        // this.grassShader.setUniformsValues({ uWindDirection: [0, 0, 0], uWindStrength: 1 });
+        this.grassAppearance = new CGFappearance(this.scene);
+        this.grassAppearance.setTexture(this.grassTexture);
+        this.grassAppearance.setAmbient(0.2, 0.8, 0.2, 1);
+        this.grassAppearance.setDiffuse(0.2, 0.8, 0.2, 1);
+        this.grassAppearance.setSpecular(0.2, 0.8, 0.2, 1);
+        this.grassAppearance.setShininess(2);
+
+        //Flower Texutres
+        this.stemTexture = new CGFtexture(this.scene, "./images/stemTexture.jpg");
+        this.diskTexture = new CGFtexture(this.scene, "./images/diskTexture.jpg");
+        this.floretTexture = new CGFtexture(this.scene, "./images/petalTexture.jpg");
+        this.leafTexture = new CGFtexture(this.scene, "./images/leafTexture.jpg");
+        this.pollenTexture = new CGFtexture(this.scene, "./images/pollenTexture.jpg");  
+
         // Create flowers and position them in the garden of 50x50
         for (let i = 0; i <= 50; i += this.flowerSpacing) {
             for (let j = 0; j <= 50; j += this.flowerSpacing) {
-                let flower = new MyFlower(this.scene, i,0,j);
+                let flower = new MyFlower(this.scene, i,0,j,this.stemTexture,this.diskTexture,this.floretTexture,this.leafTexture,this.pollenTexture);
                 this.flowers.push(flower);
             }
         }
@@ -45,7 +67,7 @@ export class MyGarden extends CGFscene {
             for (let j = 0; j <= 50; j += this.grassSpacing) {
                 //check to see if its not in a flower occupied position
                 if( (i % 10 != 0) && (j % 10 != 0)){
-                    let grassLeaf = new MyGrassLeaf(this.scene, i,0,j);
+                    let grassLeaf = new MyGrassLeaf(this.scene, i,0,j,this.grassAppearance);
                     this.grass.push(grassLeaf);
                 }
             }
