@@ -40,16 +40,10 @@ export class MyGarden extends CGFscene {
 
         //grassAppearance
         this.grassTexture = new CGFtexture(this.scene, './images/grassTexture.jpg');
-        this.grassAppearance = new CGFappearance(this.scene);
-        this.grassAppearance.setTexture(this.grassTexture);
-        this.grassAppearance.setAmbient(0.2, 0.8, 0.2, 1);
-        this.grassAppearance.setDiffuse(0.2, 0.8, 0.2, 1);
-        this.grassAppearance.setSpecular(0.2, 0.8, 0.2, 1);
-        this.grassAppearance.setShininess(2);
 
         //grass Shader
         this.grassShader = new CGFshader(this.scene.gl, "./shaders/grass.vert", "./shaders/grass.frag");
-        this.grassShader.setUniformsValues({ uWindDirection: [1, 0, 1], uWindStrength: 0 });
+        this.grassShader.setUniformsValues({ uWindDirection: [0, 0, 0], uWindStrength: 0 });
 
         //Flower Texutres
         this.stemTexture = new CGFtexture(this.scene, "./images/stemTexture.jpg");
@@ -66,17 +60,20 @@ export class MyGarden extends CGFscene {
             }
         }
 
-        // Create grass and position them in the garden of 50x50
-        for (let i = 0; i <= this.width; i += this.grassSpacing) {
-            for (let j = 0; j <= this.length; j += this.grassSpacing) {
-                //check to see if its not in a flower occupied position
-                if( (i % 10 != 0) && (j % 10 != 0)){
-                    let grassLeaf = new MyGrassLeaf(this.scene, i,0,j,this.grassAppearance,this.grassShader);
-                    this.grass.push(grassLeaf);
-                }
-            }
-        }
+        // // Create grass and position them in the garden of 50x50
+        // for (let i = 0; i <= this.width; i += this.grassSpacing) {
+        //     for (let j = 0; j <= this.length; j += this.grassSpacing) {
+        //         //check to see if its not in a flower occupied position
+        //         if( (i % 10 != 0) && (j % 10 != 0)){
+        //             let grassLeaf = new MyGrassLeaf(this.scene, i,0,j,this.grassTexture,this.grassShader);
+        //             this.grass.push(grassLeaf);
+        //         }
+        //     }
+        // }
 
+
+        let grassLeaf = new MyGrassLeaf(this.scene, 2,0,2,this.grassTexture,this.grassShader);
+        this.grass.push(grassLeaf);
     }
 
     getNumRows(){
@@ -107,11 +104,11 @@ export class MyGarden extends CGFscene {
             this.flowers[i].display();
         }
         // Display grass
-        this.scene.setActiveShader(this.grassShader);
+        // this.scene.setActiveShader(this.grassShader);
         for (let i = 0; i < this.grass.length; i++) {
             this.grass[i].display();
         }
-        this.scene.setActiveShader(this.scene.defaultShader)
+        // this.scene.setActiveShader(this.scene.defaultShader)
 
         this.hive.display();
 

@@ -1,37 +1,49 @@
-import {CGFappearance, CGFobject, CGFtexture, CGFshader} from "../../lib/CGF.js";
-import { MyEllipsoid } from "./MyEllipsoid.js";
+import { CGFappearance, CGFobject, CGFtexture, CGFshader } from "../../lib/CGF.js";
+import { MyTriangle } from "./MyTriangle.js";
+import { MyTriangleMesh } from "./MyTriangleMesh.js";
 
-export class MyGrassLeaf extends CGFobject{
-    constructor(scene,x,y,z,grassAppearance,grassShader){
+export class MyGrassLeaf extends CGFobject {
+    constructor(scene, x, y, z, grassTexture, grassShader) {
         super(scene);
         this.x = x;
         this.y = y;
         this.z = z;
         this.grassShader = grassShader;
-
-        this.grassAppearance = grassAppearance;
+        this.grassTexture = grassTexture;
 
         let minWidth = 0.1;
         let maxWidth = 0.3;
         this.width = minWidth + Math.random() * (maxWidth - minWidth);
-        
+
         let minHeight = 0.2;
         let maxHeight = 1;
         this.height = minHeight + Math.random() * (maxHeight - minHeight);
 
 
-        this.grassBody = new MyEllipsoid(scene,this.width,this.height,0.01,5,5);
+        this.triangle = new MyTriangleMesh(scene,3);
+
+        this.initMaterials();
     }
 
-    display(){
-        this.scene.pushMatrix();
-        this.scene.translate(this.x,this.y,this.z)
-        this.scene.translate(0,this.height/2,0);
-        // this.scene.setActiveShader(this.grassShader);
-        this.grassAppearance.apply();
+    initMaterials() {
 
-        this.grassBody.display();
+        // Initialize grass appearance
+        this.grassAppearance = new CGFappearance(this.scene);
+        this.grassAppearance.setTexture(this.grassTexture);
+        this.grassAppearance.setAmbient(0.2, 0.8, 0.2, 1);
+        this.grassAppearance.setDiffuse(0.2, 0.8, 0.2, 1);
+        this.grassAppearance.setSpecular(0.2, 0.8, 0.2, 1);
+        this.grassAppearance.setShininess(2);
+    }
+
+
+    display() {
+        const gl = this.scene.gl;
+        this.scene.pushMatrix();        
+        this.scene.translate(this.x, this.y, this.z);
+        this.grassAppearance.apply();
+        this.triangle.display();
+
         this.scene.popMatrix();
-        // this.scene.setActiveShader(this.scene.defaultShader);
     }
 }
