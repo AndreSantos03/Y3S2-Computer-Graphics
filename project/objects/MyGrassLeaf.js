@@ -11,8 +11,8 @@ export class MyGrassLeaf extends CGFobject {
         this.grassShader = grassShader;
         this.grassTexture = grassTexture;
 
-        let minWidth = 0.1;
-        let maxWidth = 0.3;
+        let minWidth = 0.05;
+        let maxWidth = 0.25;
         this.width = minWidth + Math.random() * (maxWidth - minWidth);
 
         let minHeight = 0.2;
@@ -41,9 +41,9 @@ export class MyGrassLeaf extends CGFobject {
         const gl = this.scene.gl;
         this.scene.pushMatrix();        
         this.scene.translate(this.x, this.y, this.z);
+        this.scene.scale(this.width,this.height,1)
         this.grassAppearance.apply();
         this.triangle.display();
-
         this.scene.popMatrix();
     }
 }

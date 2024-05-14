@@ -60,20 +60,20 @@ export class MyGarden extends CGFscene {
             }
         }
 
-        // // Create grass and position them in the garden of 50x50
-        // for (let i = 0; i <= this.width; i += this.grassSpacing) {
-        //     for (let j = 0; j <= this.length; j += this.grassSpacing) {
-        //         //check to see if its not in a flower occupied position
-        //         if( (i % 10 != 0) && (j % 10 != 0)){
-        //             let grassLeaf = new MyGrassLeaf(this.scene, i,0,j,this.grassTexture,this.grassShader);
-        //             this.grass.push(grassLeaf);
-        //         }
-        //     }
-        // }
+        // Create grass and position them in the garden of 50x50
+        for (let i = 0; i <= this.width; i += this.grassSpacing) {
+            for (let j = 0; j <= this.length; j += this.grassSpacing) {
+                //check to see if its not in a flower occupied position
+                if( !((i % 10 == 0) && (j % 10 == 0))){
+                    let grassLeaf = new MyGrassLeaf(this.scene, i,0,j,this.grassTexture,this.grassShader);
+                    this.grass.push(grassLeaf);
+                }
+            }
+        }
 
 
-        let grassLeaf = new MyGrassLeaf(this.scene, 2,0,2,this.grassTexture,this.grassShader);
-        this.grass.push(grassLeaf);
+        // let grassLeaf = new MyGrassLeaf(this.scene, 2,0,2,this.grassTexture,this.grassShader);
+        // this.grass.push(grassLeaf);
     }
 
     getNumRows(){
