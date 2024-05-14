@@ -11,7 +11,9 @@ export class MyGarden extends CGFscene {
         this.flowers = [];
         this.flowerSpacing = 10;
         this.grass = []
-        this.grassSpacing = 2;
+        this.grassSpacing = 4;
+        this.width = 20;
+        this.length = 20;
         this.rockset = new MyRockSet(scene,-10,0,-10);
         this.hive = new MyHive(scene,-10,0,-10);
 
@@ -55,16 +57,16 @@ export class MyGarden extends CGFscene {
         this.pollenTexture = new CGFtexture(this.scene, "./images/pollenTexture.jpg");  
 
         // Create flowers and position them in the garden of 50x50
-        for (let i = 0; i <= 50; i += this.flowerSpacing) {
-            for (let j = 0; j <= 50; j += this.flowerSpacing) {
+        for (let i = 0; i <= this.width; i += this.flowerSpacing) {
+            for (let j = 0; j <= this.length; j += this.flowerSpacing) {
                 let flower = new MyFlower(this.scene, i,0,j,this.stemTexture,this.diskTexture,this.floretTexture,this.leafTexture,this.pollenTexture);
                 this.flowers.push(flower);
             }
         }
 
         // Create grass and position them in the garden of 50x50
-        for (let i = 0; i <= 50; i += this.grassSpacing) {
-            for (let j = 0; j <= 50; j += this.grassSpacing) {
+        for (let i = 0; i <= this.width; i += this.grassSpacing) {
+            for (let j = 0; j <= this.length; j += this.grassSpacing) {
                 //check to see if its not in a flower occupied position
                 if( (i % 10 != 0) && (j % 10 != 0)){
                     let grassLeaf = new MyGrassLeaf(this.scene, i,0,j,this.grassAppearance);

@@ -19,7 +19,7 @@ export class MyGrassLeaf extends CGFobject{
         this.height = minHeight + Math.random() * (maxHeight - minHeight);
 
 
-        this.grassBody = new MyEllipsoid(scene,this.width,this.height,0.01,6,6);
+        this.grassBody = new MyEllipsoid(scene,this.width,this.height,0.01,5,5);
     }
 
     display(){
