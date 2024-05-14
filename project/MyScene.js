@@ -131,6 +131,7 @@ export class MyScene extends CGFscene {
   update(time){
     this.checkKeys();
     this.bee.update(time,this.pressedKeys,this.garden);
+    this.garden.update(time);
   }
 
   checkKeys() {

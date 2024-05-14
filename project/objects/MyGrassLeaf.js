@@ -1,14 +1,12 @@
-import { CGFappearance, CGFobject, CGFtexture, CGFshader } from "../../lib/CGF.js";
-import { MyTriangle } from "./MyTriangle.js";
+import { CGFappearance, CGFobject, CGFtexture } from "../../lib/CGF.js";
 import { MyTriangleMesh } from "./MyTriangleMesh.js";
 
 export class MyGrassLeaf extends CGFobject {
-    constructor(scene, x, y, z, grassTexture, grassShader) {
+    constructor(scene, x, y, z, grassTexture) {
         super(scene);
         this.x = x;
         this.y = y;
         this.z = z;
-        this.grassShader = grassShader;
         this.grassTexture = grassTexture;
 
         let minWidth = 0.05;
@@ -19,14 +17,11 @@ export class MyGrassLeaf extends CGFobject {
         let maxHeight = 1;
         this.height = minHeight + Math.random() * (maxHeight - minHeight);
 
-
-        this.triangle = new MyTriangleMesh(scene,3);
-
+        this.triangle = new MyTriangleMesh(scene, 3);
         this.initMaterials();
     }
 
     initMaterials() {
-
         // Initialize grass appearance
         this.grassAppearance = new CGFappearance(this.scene);
         this.grassAppearance.setTexture(this.grassTexture);
@@ -36,11 +31,10 @@ export class MyGrassLeaf extends CGFobject {
         this.grassAppearance.setShininess(2);
     }
 
-
     display() {
         this.scene.pushMatrix();        
         this.scene.translate(this.x, this.y, this.z);
-        this.scene.scale(this.width,this.height,1)
+        this.scene.scale(this.width, this.height, 1);
         this.grassAppearance.apply();
         this.triangle.display();
         this.scene.popMatrix();
