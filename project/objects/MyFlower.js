@@ -21,7 +21,7 @@ export class MyFlower extends CGFobject{
         this.pollen = new  MyPollen(scene, 0.2, 6, 3, false, 1, 1.4)
         this.hasPollen = true;
 
-        this.flowerRadius = getRandomNumber(0.4,1,0.001);
+        this.flowerRadius = getRandomNumber(0.4,0.7,0.001);
         this.numberFlorets = getRandomNumber(5,12,1);
         this.diskRadius = 0.3;
         this.stemRadius = getRandomNumber(0.4,0.8,0.001);;
