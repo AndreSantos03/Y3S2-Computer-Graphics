@@ -17,13 +17,13 @@ uniform float windAngle;
 void main() {
     vTextureCoord = aTextureCoord;
     // values to intensify the effects
-    float xMultiplier = 0.5;
-    float zMultipler = 3.0;
-    float xOffset = timeOscilation * sin(windAngle) * windIntensity * 0.5 * aVertexPosition.y;
+    float xMultiplier = 8.0;
+    float zMultipler = 2.0;
 
-    //we multiply by 2 to intensify the z wind effect
-    float yOffset = timeOscilation * cos(windAngle) * windIntensity * 2.0 * aVertexPosition.y;
-    vec3 displacement = vec3(xOffset, 0, yOffset);
+    float xOffset = timeOscilation * sin(windAngle) * windIntensity * xMultiplier * aVertexPosition.y;
 
-    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + displacement, 1.0);
+    float zOffset = timeOscilation * cos(windAngle) * windIntensity * zMultipler * aVertexPosition.y;
+    vec3 newPosition = vec3(aVertexPosition.x + xOffset, aVertexPosition.y,aVertexPosition.z + zOffset);
+
+    gl_Position = uPMatrix * uMVMatrix * vec4(newPosition, 1.0);
 }

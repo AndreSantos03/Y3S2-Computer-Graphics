@@ -33,6 +33,18 @@ export class MyInterface extends CGFinterface {
             // Call the updateBeeSpeed method of the scene to update the bee's speed
             this.scene.updateBeeSize(value);
         });
+        const windIntensityController = this.gui.add(this.scene, 'windIntensity', 0, 100).name('Wind Intensity');
+        windIntensityController.onChange((value) => {
+            this.scene.updateWindIntensity(value);
+        });
+
+
+        const windAngleController = this.gui.add(this.scene, 'windAngle', 0, 360, 5).name('Wind Angle (Degree)');
+        windAngleController.onChange((value) => {
+            this.scene.updateWindAngle(value * (Math.PI / 180));
+        });
+
+
         this.initKeys();
 
         return true;

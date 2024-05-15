@@ -15,7 +15,9 @@ export class MyGarden extends CGFscene {
         this.width = 50;
         this.length = 50;
         this.rockset = new MyRockSet(scene, -10, 0, -10);
-        this.hive = new MyHive(scene, -10, 0, -10);
+        this.hive = new MyHive(scene, -10,  0, -10);
+        this.windIntensity = 0;
+        this.windAngle = 0;
 
         this.init();
     }
@@ -77,6 +79,14 @@ export class MyGarden extends CGFscene {
         return this.hive;
     }
 
+    setWindIntensity(intesity){
+        this.windIntensity = intesity;
+    }
+    
+    setWindAngle(angle){
+        this.windAngle = angle;
+    }
+
     createGrass() {
         for (let i = 0; i <= this.width; i += this.grassSpacing) {
             for (let j = 0; j <= this.length; j += this.grassSpacing) {
@@ -90,9 +100,6 @@ export class MyGarden extends CGFscene {
     }
 
     update(time) {
-        //max intensity should be 0.1
-        let intensity = 0.1;
-        let angle = 0;
 
         let frequency = 2;
         let timeDisplacement = Math.sin(time / 1000.0 * frequency);        
@@ -100,8 +107,8 @@ export class MyGarden extends CGFscene {
 
         this.grassShader.setUniformsValues({
             timeOscilation: timeDisplacement,
-            windIntensity: intensity,
-            windAngle: angle,
+            windIntensity: this.windIntensity,
+            windAngle: this.windAngle,
         });
     }
 

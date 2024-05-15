@@ -41,6 +41,8 @@ export class MyScene extends CGFscene {
     this.scaleFactor = 1;
     this.beeSpeed = 0.25;
     this.beeSize = 1;
+    this.windIntensity = 0.0;
+    this.windAngle = 0.0;
 
     this.pressedKeys = [];
 
@@ -88,6 +90,13 @@ export class MyScene extends CGFscene {
   updateBeeSize(size){
     this.bee.setSize(size);
   }
+  updateWindIntensity(intensity){
+    this.garden.setWindIntensity(intensity/1000);
+  }
+  updateWindAngle(angle){
+    this.garden.setWindAngle(angle);
+  }
+
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
