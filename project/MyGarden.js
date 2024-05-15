@@ -58,6 +58,25 @@ export class MyGarden extends CGFscene {
         }
     }
 
+    getFlowerSpacing(){
+        return this.flowerSpacing;
+    }
+
+    getFlower(x,z){
+        let flowerOffset = Math.floor(this.width / this.flowerSpacing) * x + z; 
+
+        if(flowerOffset < this.flowers.length){
+            return this.flowers[flowerOffset];
+        }
+        return null;
+    }
+
+
+
+    getHive(){
+        return this.hive;
+    }
+
     createGrass() {
         for (let i = 0; i <= this.width; i += this.grassSpacing) {
             for (let j = 0; j <= this.length; j += this.grassSpacing) {

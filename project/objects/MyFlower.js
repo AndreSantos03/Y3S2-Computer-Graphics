@@ -25,7 +25,7 @@ export class MyFlower extends CGFobject{
         this.numberFlorets = getRandomNumber(5,12,1);
         this.diskRadius = 0.3;
         this.stemRadius = getRandomNumber(0.4,0.8,0.001);;
-        this.stemSize = getRandomNumber(3,5,1);
+        this.stemSize = getRandomNumber(3,4,1);
         this.floretsColor = getRandomRGBColor();
         this.diskColor = getRandomRGBColor();
         this.stemColor = getRandomRGBColor();
