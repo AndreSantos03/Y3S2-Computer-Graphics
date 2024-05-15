@@ -71,11 +71,16 @@ export class MyGarden extends CGFscene {
     }
 
     update(time) {
-        const intensity = 0.5; // Example wind intensity
-        const angle = Math.PI/4; // Example wind angle in radians
+        //max intensity should be 0.1
+        let intensity = 0.1;
+        let angle = 0;
+
+        let frequency = 2;
+        let timeDisplacement = Math.sin(time / 1000.0 * frequency);        
+
 
         this.grassShader.setUniformsValues({
-            timeFactor: time / 1000.0,
+            timeOscilation: timeDisplacement,
             windIntensity: intensity,
             windAngle: angle,
         });
