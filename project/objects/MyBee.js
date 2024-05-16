@@ -20,7 +20,7 @@ export class MyBee extends CGFobject{
         this.size = 1;
         this.velocity = [0,0,0];
         this.wingRotation = Math.PI/4;
-        this.speedIncrement = 0.25;
+        this.speedIncrement;
         this.orientationIncrement = Math.PI/12;
         this.descending = false;
         this.ascending = false;

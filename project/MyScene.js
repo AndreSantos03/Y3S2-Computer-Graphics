@@ -39,15 +39,25 @@ export class MyScene extends CGFscene {
     //Objects connected to MyInterface
     this.displayAxis = false;
     this.scaleFactor = 1;
-    this.beeSpeed = 0.25;
+    this.beeSpeed = 0.5;
     this.beeSize = 1;
     this.windIntensity = 0.0;
     this.windAngle = 0.0;
+    this.beeView = false;
 
     this.pressedKeys = [];
 
+
+    this.cameraModes = ["Normal Look", "Bee Perspective", "Bee Focus"];
+
+    //freecam
+    this.selectedCameraMode  = "Normal Look" ;
+		this.onSelectedCameraMode(this.selectedCameraMode);
+    this.freeLookSettingsApplied = false;
+
+
     this.bee = new MyBee(this,0,10,0,0);
-  
+    this.bee.setSpeed(this.beeSpeed);
     
     this.enableTextures(true);
 
@@ -99,6 +109,10 @@ export class MyScene extends CGFscene {
     this.garden.setWindAngle(angle);
   }
 
+  onSelectedCameraMode(value) {
+    this.selectedCameraMode = value;
+  }
+
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -141,18 +155,60 @@ export class MyScene extends CGFscene {
   
   update(time) {
     if (this.startTime === null) {
-        this.startTime = time; // Initialize start time if not set
+        this.startTime = time;
     }
 
     let elapsedTime = time - this.startTime;
 
-    console.log(elapsedTime);
 
     this.checkKeys();
-    this.bee.update(elapsedTime, this.pressedKeys, this.garden);
+    this.bee.update(elapsedTime,this.pressedKeys,this.garden);
     this.garden.update(elapsedTime);
 
-  } 
+    console.log(this.camera.position[2])
+
+
+
+    if(this.selectedCameraMode == "Normal Look" && this.freeLookSettingsApplied){
+      this.camera.setPosition(vec3.fromValues(50, 10, 15));
+      this.camera.setTarget(vec3.fromValues(0, 0, 0));
+      this.camera.fov = 1;
+      this.freeLookSettingsApplied = false;
+    }
+    if (this.selectedCameraMode == "Bee Perspective") {
+      if(!this.freeLookSettingsApplied){
+        this.freeLookSettingsApplied = true;
+      }
+      this.camera.fov = 90;
+
+      var beePosition = vec3.fromValues(this.bee.x, this.bee.y, this.bee.z);
+
+      var beeAngle = this.bee.orientation; 
+      var zOffset =  Math.cos(beeAngle) * 2;
+      var xOffset = Math.sin(beeAngle) * 2;
+      var cameraOffset = vec3.fromValues(xOffset * 0.5,0,zOffset * 0.5);
+      
+      var cameraPosition = vec3.create();
+      vec3.add(cameraPosition, beePosition, cameraOffset);
+
+
+      this.camera.setPosition(cameraPosition);
+  
+      var targetPosition = vec3.create();
+      var targetOffset = vec3.fromValues(xOffset ,-2,zOffset)
+      vec3.add(targetPosition,cameraPosition,targetOffset);
+
+      this.camera.setTarget(targetPosition);
+    }
+    if(this.selectedCameraMode == "Bee Focus" ){
+      if(this.freeLookSettingsApplied){
+        this.camera.fov = 1;
+        this.camera.setPosition(vec3.fromValues(50, 10, 15));
+        this.freeLookSettingsApplied = false;
+      }
+      this.camera.setTarget(vec3.fromValues(this.bee.x,this.bee.y,this.bee.z));
+    }
+  }
 
   checkKeys() {
     this.pressedKeys =[];

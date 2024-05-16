@@ -2,6 +2,8 @@ attribute vec3 aVertexPosition;
 attribute vec3 aVertexNormal;
 attribute vec2 aTextureCoord;
 
+
+
 uniform mat4 uMVMatrix;
 uniform mat4 uPMatrix;
 uniform mat4 uNMatrix;
@@ -26,7 +28,8 @@ void main() {
     float frequency = 2.0;
 
 
-    float timeOscilation = sin(frequency * timeFactor);
+
+    float timeOscilation = (sin(frequency * timeFactor) + 1.0) * 0.625 - 0.25;  //make it so this oscilates between 100 percent to the side of the wind and 25 on the other side on the "recoil" of the wind"
 
     float xOffset = timeOscilation * sin(windAngle) * windIntensity * xMultiplier * aVertexPosition.y;
     float zOffset = timeOscilation * cos(windAngle) * windIntensity * zMultipler * aVertexPosition.y;
