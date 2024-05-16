@@ -72,6 +72,8 @@ export class MyScene extends CGFscene {
     this.garden = new MyGarden(this);
     this.bee.setGarden(this.garden);
 
+    this.createPollenMessageDiv()
+
     this.setUpdatePeriod(50); // 60 FPS
     this.startTime = null;  
   }
@@ -111,6 +113,39 @@ export class MyScene extends CGFscene {
 
   onSelectedCameraMode(value) {
     this.selectedCameraMode = value;
+  }
+
+  createPollenMessageDiv() {
+    this.pollenMessageDiv = document.createElement('div');
+    this.pollenMessageDiv.textContent = 'YOU HAVE POLLEN!';
+    this.pollenMessageDiv.style.position = 'fixed'; 
+    this.pollenMessageDiv.style.top = '20px'; 
+    this.pollenMessageDiv.style.left = '20px'; 
+    this.pollenMessageDiv.style.fontSize = '48px';
+    this.pollenMessageDiv.style.fontWeight = 'bold'; 
+    document.body.appendChild(this.pollenMessageDiv);
+    this.hidePollenMessage(); 
+    
+    // RAINBOW
+    const rainbowColors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#8B00FF']; // Add more colors if needed
+    
+
+    let colorIndex = 0;
+    // Cycle through colors
+    const updateRainbowColor = () => {
+        this.pollenMessageDiv.style.color = rainbowColors[colorIndex];
+        colorIndex = (colorIndex + 1) % rainbowColors.length;
+    };
+    
+    setInterval(updateRainbowColor, 100); 
+  }
+
+  hidePollenMessage() {
+    this.pollenMessageDiv.style.display = 'none';
+  }
+
+  showPollenMessage() {
+    this.pollenMessageDiv.style.display = 'block';
   }
 
   display() {
@@ -158,15 +193,18 @@ export class MyScene extends CGFscene {
         this.startTime = time;
     }
 
+    if (this.bee.pollen !== null) {
+      this.showPollenMessage();
+    } else {
+        this.hidePollenMessage();
+    }
+
     let elapsedTime = time - this.startTime;
 
 
     this.checkKeys();
     this.bee.update(elapsedTime,this.pressedKeys,this.garden);
     this.garden.update(elapsedTime);
-
-    console.log(this.camera.position[2])
-
 
 
     if(this.selectedCameraMode == "Normal Look" && this.freeLookSettingsApplied){
