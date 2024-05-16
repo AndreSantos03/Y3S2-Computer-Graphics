@@ -26,6 +26,7 @@ export class MyBee extends CGFobject{
         this.ascending = false;
         this.atBottom = false;
         this.tripHive = false;
+        this.moving = false;
 
         this.torso = new MyEllipsoid(scene,0.5,0.5,0.8,12,12);
         this.tail = new MyEllipsoid(scene,0.6,0.6,1,12,12);
@@ -95,11 +96,13 @@ export class MyBee extends CGFobject{
 
         if(!keysPressed.empty && !this.tripHive){ //disable commands on the trip hive
             
-            if(keysPressed.includes('W')){
-                this.accelerate(this.speedIncrement); 
+            if(keysPressed.includes('W') && !this.moving ){
+                this.accelerate();
+                this.moving = true; 
             }
-            if(keysPressed.includes('S')){
-                this.accelerate(-this.speedIncrement);
+            if(keysPressed.includes('S') && this.moving){
+                this.stop();
+                this.moving = false;
             }
             if(keysPressed.includes('A')){
                 this.turn(this.orientationIncrement);
@@ -195,16 +198,15 @@ export class MyBee extends CGFobject{
         this.velocity[2] = Math.cos(this.orientation) * this.speed;
     }
     
-    accelerate(v){
-
-        //check to see if we're going over the max speed
-        //or if we're going to go backwards
-        if((v > 0 && (this.speed == 0)) || ((v < 0) && (this.speed + v >= 0))){
-            this.speed += v;
-            this.velocity[0] = Math.sin(this.orientation) * this.speed;
-            this.velocity[2] = Math.cos(this.orientation) * this.speed;
-        }
-       
+    accelerate(){
+        this.speed += this.speedIncrement;
+        this.velocity[0] = Math.sin(this.orientation) * this.speed;
+        this.velocity[2] = Math.cos(this.orientation) * this.speed;       
+    }
+    stop(){
+        this.speed = 0;
+        this.velocity[0] = 0;
+        this.velocity[2] = 0;
     }
     setSpeed(speed) {
         this.speedIncrement = speed;
