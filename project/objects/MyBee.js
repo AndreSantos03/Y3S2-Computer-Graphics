@@ -221,7 +221,7 @@ export class MyBee extends CGFobject{
 
     tryGetPollen() {
         let flowerSpacing = this.garden.getFlowerSpacing();
-        const threshold = 1.5; // Threshold value
+        const threshold = 2.5; // Threshold value
     
         // Calculate the nearest flower positions along the x and z axes
         let nearestFlowerX = Math.round(this.x / flowerSpacing) * flowerSpacing;
@@ -238,6 +238,7 @@ export class MyBee extends CGFobject{
     
             let flower = this.garden.getFlower(flowerX, flowerZ);
             if (flower != null) {
+                console.log(flowerX + " " + flowerZ)
                 // It got a flower
                 this.pollen = flower.givePollen();
             }
