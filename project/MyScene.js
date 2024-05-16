@@ -61,7 +61,9 @@ export class MyScene extends CGFscene {
 
     this.garden = new MyGarden(this);
     this.bee.setGarden(this.garden);
+
     this.setUpdatePeriod(50); // 60 FPS
+    this.startTime = null;  
   }
   initLights() {
     this.lights[0].setPosition(15, 0, 5, 1);
@@ -91,7 +93,7 @@ export class MyScene extends CGFscene {
     this.bee.setSize(size);
   }
   updateWindIntensity(intensity){
-    this.garden.setWindIntensity(intensity/1000);
+    this.garden.setWindIntensity(intensity/700); //to make the slider 0  to 100
   }
   updateWindAngle(angle){
     this.garden.setWindAngle(angle);
@@ -137,11 +139,20 @@ export class MyScene extends CGFscene {
     // ---- END Primitive drawing section
   }
   
-  update(time){
+  update(time) {
+    if (this.startTime === null) {
+        this.startTime = time; // Initialize start time if not set
+    }
+
+    let elapsedTime = time - this.startTime;
+
+    console.log(elapsedTime);
+
     this.checkKeys();
-    this.bee.update(time,this.pressedKeys,this.garden);
-    this.garden.update(time);
-  }
+    this.bee.update(elapsedTime, this.pressedKeys, this.garden);
+    this.garden.update(elapsedTime);
+
+  } 
 
   checkKeys() {
     this.pressedKeys =[];
