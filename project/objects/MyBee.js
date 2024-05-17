@@ -28,6 +28,12 @@ export class MyBee extends CGFobject{
         this.tripHive = false;
         this.moving = false;
 
+        //variables for circle descent and ascent
+        this.circleSpeed= 0.1;
+        this.angleCircleIncrement = 0; //stores the angle increment for when ascending and descending
+        this.verticalCircleSpeed = 0.10;
+        this.circlingSpeed = 0.02;
+
         this.torso = new MyEllipsoid(scene,0.5,0.5,0.8,12,12);
         this.tail = new MyEllipsoid(scene,0.6,0.6,1,12,12);
         this.head = new MyEllipsoid(scene,0.5,0.3,0.6,7,7);
@@ -111,13 +117,20 @@ export class MyBee extends CGFobject{
                 this.turn(-this.orientationIncrement);
             }
             if(keysPressed.includes('F') && this.pollen == null && !this.atBottom){
+                //reset speed
+                this.velocity = [0,0,0];
+                console.log(this.velocity);
                 this.descending = true;
-                this.velocity[1] = -0.25; //descending velocity
+                this.velocity[1] = -this.verticalCircleSpeed; //descending velocity
+                //take into account that the bottom position is 4
+                let framesToReachBottom = (this.y - 4) / this.verticalCircleSpeed;
+                this.angleCircleIncrement = Math.PI * 2 / framesToReachBottom;
+                this.accelerate(this.circlingSpeed)
             }
             if(keysPressed.includes('P') && this.atBottom){
                 this.tryGetPollen();
                 this.ascending = true;
-                this.velocity[1] = 0.25; // set velocity up
+                this.velocity[1] = this.verticalCircleSpeed; // set velocity up
                 this.atBottom = false;
             }
             if(keysPressed.includes('O') && this.pollen != null){
@@ -133,15 +146,16 @@ export class MyBee extends CGFobject{
             }
         }
     
-        //check to see if descent is done
-        if(this.descending){
-            if(this.y <=  4){
+        if (this.descending) {
+            //check if descent is done
+            if (this.y <=  4) {
                 this.atBottom = true;
                 this.descending = false;
-                //reset velocity
-                this.velocity[1] = 0;
-            }
-        }
+                this.velocity = [0,0,0]; //reset velocity
+            } else {
+                this.turn(this.angleCircleIncrement);
+            }     
+        }   
         //check to see if ascent is done
         else if(this.ascending){
             if(this.y >= 10){
@@ -240,7 +254,6 @@ export class MyBee extends CGFobject{
     
             let flower = this.garden.getFlower(flowerX, flowerZ);
             if (flower != null) {
-                console.log(flowerX + " " + flowerZ)
                 // It got a flower
                 this.pollen = flower.givePollen();
             }
