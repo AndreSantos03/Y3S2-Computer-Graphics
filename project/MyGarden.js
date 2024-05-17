@@ -100,12 +100,12 @@ export class MyGarden extends CGFscene {
     }
 
     update(time) {
-
-        var timeFactor = time  / 1000.0;
+        const frequency = 2.0;
+        var timeOscilation = Math.sin(time  / 1000.0 * frequency);
 
 
         this.grassShader.setUniformsValues({
-            timeFactor: timeFactor,
+            timeOscilation: timeOscilation,
             windIntensity: this.windIntensity,
             windAngle: this.windAngle,
         });
