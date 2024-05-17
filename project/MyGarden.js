@@ -52,9 +52,9 @@ export class MyGarden extends CGFscene {
     }
 
     createFlowers() {
-        for (let i = 0; i <= this.width; i += this.flowerSpacing) {
-            for (let j = 0; j <= this.length; j += this.flowerSpacing) {
-                let flower = new MyFlower(this.scene, j, 0, i, this.stemTexture, this.diskTexture, this.floretTexture, this.leafTexture, this.pollenTexture);
+        for (let x = 0; x <= this.width; x += this.flowerSpacing) {
+            for (let z = 0; z <= this.length; z += this.flowerSpacing) {
+                let flower = new MyFlower(this.scene, x, 0,z, this.stemTexture, this.diskTexture, this.floretTexture, this.leafTexture, this.pollenTexture);
                 this.flowers.push(flower);
             }
         }
@@ -65,7 +65,7 @@ export class MyGarden extends CGFscene {
     }
 
     getFlower(x,z){
-        let flowerOffset = Math.floor(this.width / this.flowerSpacing) * z + x; 
+        let flowerOffset = Math.floor(this.width / this.flowerSpacing) * x + z; 
 
         if(flowerOffset < this.flowers.length){
             return this.flowers[flowerOffset];
