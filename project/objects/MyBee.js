@@ -94,7 +94,7 @@ export class MyBee extends CGFobject{
 
     update(time,keysPressed){
 
-        if(!keysPressed.empty && !this.tripHive){ //disable commands on the trip hive
+        if(!keysPressed.empty && !this.tripHive && !this.ascending && !this.descending){ //disable commands on the trip hive
             
             if(keysPressed.includes('W') && !this.moving ){
                 this.accelerate();
