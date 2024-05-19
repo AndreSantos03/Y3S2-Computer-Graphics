@@ -32,7 +32,7 @@ export class MyBee extends CGFobject{
         this.circleSpeed= 0.1;
         this.angleCircleIncrement = 0; //stores the angle increment for when ascending and descending
         this.verticalCircleSpeed = 0.10;
-        this.circlingSpeed = 0.02;
+        this.circlingSpeed = 0.01;
 
         this.torso = new MyEllipsoid(scene,0.5,0.5,0.8,12,12);
         this.tail = new MyEllipsoid(scene,0.6,0.6,1,12,12);
@@ -119,7 +119,6 @@ export class MyBee extends CGFobject{
             if(keysPressed.includes('F') && this.pollen == null && !this.atBottom){
                 //reset speed
                 this.velocity = [0,0,0];
-                console.log(this.velocity);
                 this.descending = true;
                 this.velocity[1] = -this.verticalCircleSpeed; //descending velocity
                 //take into account that the bottom position is 4
@@ -130,8 +129,14 @@ export class MyBee extends CGFobject{
             if(keysPressed.includes('P') && this.atBottom){
                 this.tryGetPollen();
                 this.ascending = true;
-                this.velocity[1] = this.verticalCircleSpeed; // set velocity up
                 this.atBottom = false;
+                //reset speed
+                this.velocity = [0,0,0];
+                this.velocity[1] = this.verticalCircleSpeed; // set velocity up
+                //take into account that the bottom position is 4
+                let framesToReachTop = (10 - this.y) / this.verticalCircleSpeed;
+                this.angleCircleIncrement = Math.PI * 2 / framesToReachTop;
+                this.accelerate(this.circlingSpeed)
             }
             if(keysPressed.includes('O') && this.pollen != null){
                 this.tripHive = true;
@@ -161,7 +166,12 @@ export class MyBee extends CGFobject{
             if(this.y >= 10){
                 this.ascending = false;
                 this.velocity[1] = 0;
+                this.velocity = [0,0,0]; //reset velocity
+
             }
+            else {
+                this.turn(this.angleCircleIncrement);
+            }     
         }
         else if(this.tripHive){
             if(this.x <= -10  && this.z <= -10){
