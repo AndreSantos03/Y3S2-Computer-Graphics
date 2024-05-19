@@ -100,6 +100,8 @@ export class MyBee extends CGFobject{
 
     update(time,keysPressed){
 
+        console.log(this.velocity)
+
         if(!keysPressed.empty && !this.tripHive && !this.ascending && !this.descending){ //disable commands on the trip hive
             
             if(keysPressed.includes('W') && !this.moving ){
@@ -156,7 +158,7 @@ export class MyBee extends CGFobject{
             if (this.y <=  4) {
                 this.atBottom = true;
                 this.descending = false;
-                this.velocity = [0,0,0]; //reset velocity
+                this.stop(); //reset velocity
             } else {
                 this.turn(this.angleCircleIncrement);
             }     
@@ -166,7 +168,7 @@ export class MyBee extends CGFobject{
             if(this.y >= 10){
                 this.ascending = false;
                 this.velocity[1] = 0;
-                this.velocity = [0,0,0]; //reset velocity
+                this.stop(); //reset velocity
 
             }
             else {
@@ -178,7 +180,7 @@ export class MyBee extends CGFobject{
                 this.garden.getHive().addPollen(this.pollen);
                 this.pollen = null;
                 this.tripHive = false;
-                this.velocity = [0,0,0]; //reset speed
+                this.stop() //reset speed
             }
         }
         //normal oscilation animations
