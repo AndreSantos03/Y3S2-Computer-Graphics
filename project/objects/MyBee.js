@@ -146,7 +146,7 @@ export class MyBee extends CGFobject{
                 var z_offset = -10 - this.z; // hive position is -10
 
                 var angle = Math.atan2(z_offset, x_offset);
-                this.accelerate(this.speedIncrement);            
+                this.accelerate(this.circlingSpeed);            
                 this.turn(angle);
             }
         }
