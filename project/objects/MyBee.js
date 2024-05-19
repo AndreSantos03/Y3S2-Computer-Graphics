@@ -100,7 +100,6 @@ export class MyBee extends CGFobject{
 
     update(time,keysPressed){
 
-
         if(!keysPressed.empty && !this.tripHive && !this.ascending && !this.descending){ //disable commands on the trip hive
             
             if(keysPressed.includes('W') && !this.moving ){
@@ -158,6 +157,7 @@ export class MyBee extends CGFobject{
                 this.atBottom = true;
                 this.descending = false;
                 this.stop(); //reset velocity
+                this.velocity[1] = 0;//reset vertical velocity
             } else {
                 this.turn(this.angleCircleIncrement);
             }     
