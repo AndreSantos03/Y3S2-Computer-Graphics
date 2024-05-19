@@ -100,7 +100,6 @@ export class MyBee extends CGFobject{
 
     update(time,keysPressed){
 
-        console.log(this.velocity)
 
         if(!keysPressed.empty && !this.tripHive && !this.ascending && !this.descending){ //disable commands on the trip hive
             
