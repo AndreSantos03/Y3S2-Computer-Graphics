@@ -2,10 +2,10 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyPlane } from "./objects/MyPlane.js";
 import { MySkySphere } from "./objects/MySkySphere.js";
 import { MyPanorama } from "./objects/MyPanorama.js";
-import { MyRock } from "./objects/MyRock.js";
+import { MyRock } from "./geometry/MyRock.js";
 import { MyRockSet } from "./objects/MyRockSet.js";
 
-import { MyGarden } from "./MyGarden.js";
+import { MyGarden } from "./objects/MyGarden.js";
 import { MyBee } from "./objects/MyBee.js";
 import { MyHive } from "./objects/MyHive.js";
 

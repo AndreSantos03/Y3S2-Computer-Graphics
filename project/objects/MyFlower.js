@@ -1,8 +1,8 @@
 import {CGFappearance, CGFobject, CGFtexture} from "../../lib/CGF.js";
-import { MySphere } from "./MySphere.js";
-import { MyTriangle } from "./MyTriangle.js";
-import { MyCylinder } from "./MyCylinder.js";
-import { MyPollen } from "./MyPollen.js";
+import { MySphere } from "../geometry/MySphere.js";
+import { MyTriangle } from "../geometry/MyTriangle.js";
+import { MyCylinder } from "../geometry/MyCylinder.js";
+import { MyPollen } from "../geometry/MyPollen.js";
 
 export class MyFlower extends CGFobject{
     constructor(scene,x,y,z,stemTexture,diskTexture,floretTexture,leafTexture,pollenTexture){

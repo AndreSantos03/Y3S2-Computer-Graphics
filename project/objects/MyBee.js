@@ -1,8 +1,8 @@
 import {CGFappearance, CGFobject, CGFtexture} from "../../lib/CGF.js";
 
-import { MyEllipsoid } from "./MyEllipsoid.js";
-import { MyCone } from "./MyCone.js";
-import { MyEllipse } from "./MyEllipse.js";
+import { MyEllipsoid } from "../geometry/MyEllipsoid.js";
+import { MyCone } from "../geometry/MyCone.js";
+import { MyEllipse } from "../geometry/MyEllipse.js";
 
 
 export class MyBee extends CGFobject{

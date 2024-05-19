@@ -1,8 +1,8 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture, CGFshader } from "../../lib/CGF.js";
-import { MyFlower } from "./objects/MyFlower.js";
-import { MyGrassLeaf } from "./objects/MyGrassLeaf.js";
-import { MyHive } from "./objects/MyHive.js";
-import { MyRockSet } from "./objects/MyRockSet.js";
+import { MyFlower } from "./MyFlower.js";
+import { MyGrassLeaf } from "./MyGrassLeaf.js";
+import { MyHive } from "./MyHive.js";
+import { MyRockSet } from "./MyRockSet.js";
 
 export class MyGarden extends CGFscene {
     constructor(scene) {

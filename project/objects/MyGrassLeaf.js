@@ -1,5 +1,5 @@
 import { CGFappearance, CGFobject, CGFtexture } from "../../lib/CGF.js";
-import { MyTriangleMesh } from "./MyTriangleMesh.js";
+import { MyTriangleMesh } from "../geometry/MyTriangleMesh.js";
 
 export class MyGrassLeaf extends CGFobject {
     constructor(scene, x, y, z, grassTexture) {
