@@ -101,21 +101,25 @@ export class MyBee extends CGFobject{
     update(time,keysPressed){
 
         if(!keysPressed.empty && !this.tripHive && !this.ascending && !this.descending){ //disable commands on the trip hive
-            
+            //go forward
             if(keysPressed.includes('W') && !this.moving ){
                 this.accelerate();
                 this.moving = true; 
             }
+            //go backwards
             if(keysPressed.includes('S') && this.moving){
                 this.stop();
                 this.moving = false;
             }
+            //lean torwards the left
             if(keysPressed.includes('A')){
                 this.turn(this.orientationIncrement);
             }
+            //lean torwards the right
             if(keysPressed.includes('D')){
                 this.turn(-this.orientationIncrement);
             }
+            //go down
             if(keysPressed.includes('F') && this.pollen == null && !this.atBottom){
                 //reset speed
                 this.velocity = [0,0,0];
@@ -126,6 +130,7 @@ export class MyBee extends CGFobject{
                 this.angleCircleIncrement = Math.PI * 2 / framesToReachBottom;
                 this.accelerate(this.circlingSpeed)
             }
+            //pick pollen
             if(keysPressed.includes('P') && this.atBottom){
                 this.tryGetPollen();
                 this.ascending = true;
@@ -138,6 +143,7 @@ export class MyBee extends CGFobject{
                 this.angleCircleIncrement = Math.PI * 2 / framesToReachTop;
                 this.accelerate(this.circlingSpeed)
             }
+            //go to hive
             if(keysPressed.includes('O') && this.pollen != null){
                 this.tripHive = true;
                 
@@ -174,7 +180,9 @@ export class MyBee extends CGFobject{
                 this.turn(this.angleCircleIncrement);
             }     
         }
+        //check to see if it's currently going to the hive
         else if(this.tripHive){
+            //check fi it arrived to the hive
             if(this.x <= -10  && this.z <= -10){
                 this.garden.getHive().addPollen(this.pollen);
                 this.pollen = null;
