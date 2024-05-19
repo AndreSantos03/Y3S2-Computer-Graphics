@@ -20,7 +20,7 @@ export class MyInterface extends CGFinterface {
         //Checkbox element in GUI
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
 
-        this.gui.add(this.scene, 'selectedCameraMode', this.scene.cameraModes).name('Camera Moes').onChange(this.scene.onSelectedCameraMode.bind(this.scene));
+        this.gui.add(this.scene, 'selectedCameraMode', this.scene.cameraModes).name('Camera Modes').onChange(this.scene.onSelectedCameraMode.bind(this.scene));
 
 
         //Slider element in GUI
