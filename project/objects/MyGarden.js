@@ -49,6 +49,13 @@ export class MyGarden extends CGFscene {
 
         // Initialize grass shader
         this.grassShader = new CGFshader(this.scene.gl, "./shaders/grass.vert", "./shaders/grass.frag");
+
+
+        this.stemTexture = new CGFtexture(this.scene, './images/stemTexture.jpg');
+        this.diskTexture = new CGFtexture(this.scene, './images/diskTexture.jpg');
+        this.floretTexture = new CGFtexture(this.scene, './images/petalTexture.jpg');
+        this.leafTexture = new CGFtexture(this.scene, './images/leafTexture.jpg');
+        this.pollenTexture = new CGFtexture(this.scene, './images/pollenTexture.jpg');
     }
 
     createFlowers() {
