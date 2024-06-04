@@ -96,7 +96,6 @@ This project demonstrates the integration of various computer graphics technique
 
 ---
 
-**Authors**: [Your Name], [Group Members' Names]  
 **Course**: Licenciatura em Engenharia Informática e Computação  
 **Institution**: Faculdade de Engenharia da Universidade do Porto  
 **Year**: 2023/2024
